@@ -1,0 +1,18 @@
+aid: e2open
+url: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/apis.yml
+apis:
+- aid: e2open:e2open-api
+  name: E2open (BluJay) Supply Chain API
+  tags:
+  - Supply Chain
+  - Logistics
+  - Visibility
+  - Trade Management
+  image: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/image.png
+  humanURL: https://www.e2open.com/
+  baseURL: https://api.e2open.example.com
+  properties:
+  - url: https://www.e2open.com/
+    type: Documentation
+  description: >-
+    E2open (formerly BluJay Solutions) provides supply chain management and global trade platform APIs. The platform enables supply chain event management, transportation management, customs compliance, and end-to-end shipment visibility across logistics networks.
