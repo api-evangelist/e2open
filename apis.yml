@@ -38,6 +38,8 @@ apis:
     type: Reference
   - url: https://www.inttra.com/services/integration/
     type: GettingStarted
+  - url: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/openapi/inttra-ocean-execution-openapi.yml
+    type: OpenAPI
   description: >-
     INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a token obtained from the identity service before making API requests.
 - aid: e2open:e2open-transportation-management-api
@@ -59,6 +61,12 @@ apis:
 common:
 - url: https://www.e2open.com/
   type: Website
+- url: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/openapi/inttra-ocean-execution-openapi.yml
+  type: OpenAPI
+- url: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/json-schema/e2open-shipment-schema.json
+  type: JSONSchema
+- url: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/json-ld/e2open-context.jsonld
+  type: JSONLDContext
 - url: https://apidocs.inttra.com/
   type: Portal
 - url: https://www.e2open.com/e2open-network-connectivity/

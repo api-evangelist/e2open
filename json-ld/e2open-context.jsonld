@@ -1,0 +1,116 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "e2open": "https://api.inttra.com/v1/schemas/",
+    "schema": "https://schema.org/",
+    "mar": "https://www.w3.org/ns/maritime#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Shipment": {
+      "@id": "schema:ParcelDelivery",
+      "@type": "schema:ParcelDelivery"
+    },
+    "Booking": {
+      "@id": "e2open:Booking",
+      "@type": "schema:Order"
+    },
+    "Container": {
+      "@id": "e2open:Container",
+      "@type": "schema:Product"
+    },
+    "Vessel": {
+      "@id": "e2open:Vessel",
+      "@type": "schema:Vehicle"
+    },
+    "TradeParty": {
+      "@id": "e2open:TradeParty",
+      "@type": "schema:Organization"
+    },
+    "Port": {
+      "@id": "e2open:Port",
+      "@type": "schema:Place"
+    },
+    "TrackingEvent": {
+      "@id": "e2open:TrackingEvent",
+      "@type": "schema:DeliveryEvent"
+    },
+
+    "bookingId": "@id",
+    "carrierBookingReference": {
+      "@id": "schema:confirmationNumber"
+    },
+    "carrier": {
+      "@id": "schema:provider"
+    },
+    "status": {
+      "@id": "schema:orderStatus"
+    },
+    "originPort": {
+      "@id": "schema:originAddress"
+    },
+    "destinationPort": {
+      "@id": "schema:deliveryAddress"
+    },
+    "etd": {
+      "@id": "schema:departureTime",
+      "@type": "xsd:date"
+    },
+    "eta": {
+      "@id": "schema:arrivalTime",
+      "@type": "xsd:date"
+    },
+    "portCode": {
+      "@id": "schema:identifier"
+    },
+    "portName": "schema:name",
+    "country": "schema:addressCountry",
+    "vesselName": "schema:name",
+    "imoNumber": {
+      "@id": "e2open:imoNumber"
+    },
+    "shipper": {
+      "@id": "schema:sender",
+      "@type": "schema:Organization"
+    },
+    "consignee": {
+      "@id": "schema:recipient",
+      "@type": "schema:Organization"
+    },
+    "containers": {
+      "@id": "e2open:hasContainer",
+      "@container": "@set"
+    },
+    "containerNumber": {
+      "@id": "schema:serialNumber"
+    },
+    "containerType": {
+      "@id": "schema:productID"
+    },
+    "grossWeightKg": {
+      "@id": "schema:weight",
+      "@type": "schema:QuantitativeValue"
+    },
+    "commodity": {
+      "@id": "schema:description"
+    },
+    "hsCode": {
+      "@id": "e2open:harmonizedSystemCode"
+    },
+    "eventType": {
+      "@id": "schema:name"
+    },
+    "eventDateTime": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "submittedAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "confirmedAt": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

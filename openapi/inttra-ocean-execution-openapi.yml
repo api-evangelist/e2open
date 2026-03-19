@@ -1,0 +1,641 @@
+openapi: 3.1.0
+info:
+  title: INTTRA Ocean Execution API (e2open)
+  description: >-
+    INTTRA (now part of e2open) provides ocean execution APIs for the world's largest
+    multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with
+    JSON for booking, ocean schedules, rates, and visibility/track and trace products.
+    Authentication requires a bearer token obtained from the identity service before making
+    API requests.
+  version: 1.0.0
+  contact:
+    name: INTTRA / e2open Support
+    url: https://knowledge.e2open.com/knowledgecenter/inttra-resources/
+  license:
+    name: e2open Terms
+    url: https://www.inttra.com/legal/
+servers:
+  - url: https://api.inttra.com/v1
+    description: INTTRA Ocean Execution API Production
+security:
+  - bearerAuth: []
+tags:
+  - name: Bookings
+    description: Ocean shipping booking management
+  - name: Schedules
+    description: Ocean carrier schedule lookup
+  - name: Rates
+    description: Ocean freight rate inquiries
+  - name: Tracking
+    description: Container and shipment tracking
+  - name: Shipping Instructions
+    description: Bill of lading shipping instructions
+paths:
+  /bookings:
+    get:
+      operationId: listBookings
+      summary: List ocean bookings
+      description: >-
+        Returns a list of ocean shipping bookings. Supports filtering by carrier, booking date,
+        port of origin, port of destination, and booking status.
+      tags:
+        - Bookings
+      parameters:
+        - name: carrier
+          in: query
+          description: Filter by carrier SCAC code
+          schema:
+            type: string
+            example: MAEU
+        - name: status
+          in: query
+          description: Filter by booking status
+          schema:
+            type: string
+            enum: [PENDING, CONFIRMED, CANCELLED, AMENDED]
+        - name: originPort
+          in: query
+          description: UN/LOCODE for origin port
+          schema:
+            type: string
+            example: USLAX
+        - name: destinationPort
+          in: query
+          description: UN/LOCODE for destination port
+          schema:
+            type: string
+            example: CNSHA
+        - name: bookedAfter
+          in: query
+          description: Filter bookings created after this date (ISO 8601)
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 200
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of ocean bookings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createBooking
+      summary: Create an ocean booking
+      description: >-
+        Submits a new ocean booking request to the specified carrier through the INTTRA network.
+        Returns a booking confirmation with carrier booking reference.
+      tags:
+        - Bookings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Booking submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /bookings/{bookingId}:
+    get:
+      operationId: getBooking
+      summary: Get booking details
+      description: Returns full details for a specific ocean booking.
+      tags:
+        - Bookings
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          description: INTTRA booking identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: amendBooking
+      summary: Amend an existing booking
+      description: Modifies an existing ocean booking. Subject to carrier acceptance.
+      tags:
+        - Bookings
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingAmendment'
+      responses:
+        '200':
+          description: Booking amendment submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+  /bookings/{bookingId}/cancel:
+    post:
+      operationId: cancelBooking
+      summary: Cancel a booking
+      description: Cancels an ocean booking. Subject to carrier cancellation policies.
+      tags:
+        - Bookings
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Booking cancelled
+  /schedules:
+    get:
+      operationId: searchSchedules
+      summary: Search ocean vessel schedules
+      description: >-
+        Returns vessel sailing schedules from origin to destination port. Supports filtering
+        by carrier, vessel, and date range.
+      tags:
+        - Schedules
+      parameters:
+        - name: originPort
+          in: query
+          required: true
+          description: UN/LOCODE origin port
+          schema:
+            type: string
+        - name: destinationPort
+          in: query
+          required: true
+          description: UN/LOCODE destination port
+          schema:
+            type: string
+        - name: departureAfter
+          in: query
+          description: Search from this departure date (ISO 8601)
+          schema:
+            type: string
+            format: date
+        - name: departureBefore
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: carrier
+          in: query
+          description: Filter by carrier SCAC code
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Ocean schedules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleList'
+  /tracking/{containerNumber}:
+    get:
+      operationId: trackContainer
+      summary: Track a container by number
+      description: >-
+        Returns current location, status, and event history for a specific container.
+        Provides real-time tracking from all INTTRA carrier partners.
+      tags:
+        - Tracking
+      parameters:
+        - name: containerNumber
+          in: path
+          required: true
+          description: ISO 6346 container number (e.g., MSCU1234567)
+          schema:
+            type: string
+            pattern: '^[A-Z]{4}[0-9]{7}$'
+      responses:
+        '200':
+          description: Container tracking information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerTracking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tracking/booking/{bookingId}:
+    get:
+      operationId: trackBooking
+      summary: Track shipment by booking reference
+      description: Returns tracking events for all containers in a booking.
+      tags:
+        - Tracking
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Booking tracking information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookingId:
+                    type: string
+                  containers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ContainerTracking'
+  /shipping-instructions:
+    post:
+      operationId: submitShippingInstructions
+      summary: Submit shipping instructions (SI)
+      description: >-
+        Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed
+        booking. Includes cargo description, consignee, notify parties, and special instructions.
+      tags:
+        - Shipping Instructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingInstructionsRequest'
+      responses:
+        '201':
+          description: Shipping instructions submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingInstructions'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the INTTRA identity service
+  schemas:
+    BookingList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        bookings:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingSummary'
+    BookingSummary:
+      type: object
+      properties:
+        bookingId:
+          type: string
+          description: INTTRA booking reference
+        carrierBookingReference:
+          type: string
+          description: Carrier-assigned booking reference
+        carrier:
+          type: string
+          description: Carrier SCAC code
+        status:
+          type: string
+          enum: [PENDING, CONFIRMED, CANCELLED, AMENDED]
+        originPort:
+          type: string
+        destinationPort:
+          type: string
+        etd:
+          type: string
+          format: date
+          description: Estimated time of departure
+        eta:
+          type: string
+          format: date
+          description: Estimated time of arrival
+    Booking:
+      allOf:
+        - $ref: '#/components/schemas/BookingSummary'
+        - type: object
+          properties:
+            booker:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+            shipper:
+              $ref: '#/components/schemas/TradeParty'
+            consignee:
+              $ref: '#/components/schemas/TradeParty'
+            containers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Container'
+            commodity:
+              type: string
+            vessel:
+              $ref: '#/components/schemas/Vessel'
+            voyage:
+              type: string
+            submittedAt:
+              type: string
+              format: date-time
+            confirmedAt:
+              type: string
+              format: date-time
+    BookingRequest:
+      type: object
+      required: [carrier, originPort, destinationPort, etd, containers]
+      properties:
+        carrier:
+          type: string
+          description: Carrier SCAC code
+        originPort:
+          type: string
+          description: UN/LOCODE origin port
+        destinationPort:
+          type: string
+          description: UN/LOCODE destination port
+        etd:
+          type: string
+          format: date
+        shipper:
+          $ref: '#/components/schemas/TradeParty'
+        consignee:
+          $ref: '#/components/schemas/TradeParty'
+        containers:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ContainerRequest'
+        commodity:
+          type: string
+        specialInstructions:
+          type: string
+    BookingAmendment:
+      type: object
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerRequest'
+        etd:
+          type: string
+          format: date
+        reason:
+          type: string
+    ScheduleList:
+      type: object
+      properties:
+        total:
+          type: integer
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+    Schedule:
+      type: object
+      properties:
+        carrier:
+          type: string
+        carrierName:
+          type: string
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        voyage:
+          type: string
+        originPort:
+          type: string
+        destinationPort:
+          type: string
+        etd:
+          type: string
+          format: date-time
+        eta:
+          type: string
+          format: date-time
+        transitTimeDays:
+          type: integer
+        cutoffDateTime:
+          type: string
+          format: date-time
+          description: Documentation and cargo cutoff
+        availableEquipment:
+          type: array
+          items:
+            type: string
+            enum: [20GP, 40GP, 40HC, 45HC, 20RF, 40RF]
+    ContainerTracking:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+        status:
+          type: string
+          enum: [EMPTY, GATE_IN, LOADED, DEPARTED, IN_TRANSIT, ARRIVED, GATE_OUT, RETURNED]
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+    TrackingEvent:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum: [GATE_IN, LOADED, DEPARTED, IN_TRANSIT, ARRIVED, GATE_OUT, EMPTY_RETURN, TRANSSHIPMENT]
+        eventDescription:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        eventDateTime:
+          type: string
+          format: date-time
+        isActual:
+          type: boolean
+          description: true if actual event, false if estimated
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        voyage:
+          type: string
+    Location:
+      type: object
+      properties:
+        portCode:
+          type: string
+          description: UN/LOCODE
+        portName:
+          type: string
+        country:
+          type: string
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: '^[0-9]{7}$'
+        callSign:
+          type: string
+    Container:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+          enum: [20GP, 40GP, 40HC, 45HC, 20RF, 40RF, 20OT, 40OT]
+        sealNumber:
+          type: string
+        weightKg:
+          type: number
+    ContainerRequest:
+      type: object
+      required: [containerType, quantity]
+      properties:
+        containerType:
+          type: string
+          enum: [20GP, 40GP, 40HC, 45HC, 20RF, 40RF]
+        quantity:
+          type: integer
+          minimum: 1
+        weightKg:
+          type: number
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    ShippingInstructionsRequest:
+      type: object
+      required: [bookingId, shipper, consignee, cargoDescription]
+      properties:
+        bookingId:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/TradeParty'
+        consignee:
+          $ref: '#/components/schemas/TradeParty'
+        notifyParty:
+          $ref: '#/components/schemas/TradeParty'
+        cargoDescription:
+          type: string
+        hsCode:
+          type: string
+          description: Harmonized System tariff code
+        grossWeightKg:
+          type: number
+        numberOfPackages:
+          type: integer
+        packageType:
+          type: string
+        marksAndNumbers:
+          type: string
+        specialInstructions:
+          type: string
+    ShippingInstructions:
+      allOf:
+        - $ref: '#/components/schemas/ShippingInstructionsRequest'
+        - type: object
+          properties:
+            siReference:
+              type: string
+            status:
+              type: string
+              enum: [SUBMITTED, ACCEPTED, REJECTED, PROCESSED]
+            submittedAt:
+              type: string
+              format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

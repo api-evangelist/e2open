@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.inttra.com/v1/schemas/shipment",
+  "title": "e2open / INTTRA Ocean Shipment",
+  "description": "Schema representing an ocean shipping booking and tracking record in the INTTRA e2open platform.",
+  "type": "object",
+  "required": ["bookingId", "carrier", "originPort", "destinationPort", "status"],
+  "properties": {
+    "bookingId": {
+      "type": "string",
+      "description": "INTTRA booking reference identifier"
+    },
+    "carrierBookingReference": {
+      "type": "string",
+      "description": "Ocean carrier's own booking reference number"
+    },
+    "carrier": {
+      "type": "string",
+      "description": "Ocean carrier SCAC code",
+      "examples": ["MAEU", "MSCU", "CMDU", "HLCU", "EGLV"],
+      "minLength": 4,
+      "maxLength": 4
+    },
+    "carrierName": {
+      "type": "string",
+      "description": "Full name of the ocean carrier",
+      "examples": ["Maersk", "MSC", "CMA CGM", "Hapag-Lloyd", "Evergreen"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current booking status",
+      "enum": ["PENDING", "CONFIRMED", "CANCELLED", "AMENDED", "COMPLETED"]
+    },
+    "originPort": {
+      "$ref": "#/$defs/Port",
+      "description": "Port of loading (POL)"
+    },
+    "destinationPort": {
+      "$ref": "#/$defs/Port",
+      "description": "Port of discharge (POD)"
+    },
+    "etd": {
+      "type": "string",
+      "format": "date",
+      "description": "Estimated time of departure"
+    },
+    "eta": {
+      "type": "string",
+      "format": "date",
+      "description": "Estimated time of arrival"
+    },
+    "vessel": {
+      "$ref": "#/$defs/Vessel"
+    },
+    "voyage": {
+      "type": "string",
+      "description": "Vessel voyage number"
+    },
+    "shipper": {
+      "$ref": "#/$defs/TradeParty"
+    },
+    "consignee": {
+      "$ref": "#/$defs/TradeParty"
+    },
+    "notifyParty": {
+      "$ref": "#/$defs/TradeParty"
+    },
+    "containers": {
+      "type": "array",
+      "description": "List of containers in this booking",
+      "items": {
+        "$ref": "#/$defs/Container"
+      }
+    },
+    "commodity": {
+      "type": "string",
+      "description": "Commodity description"
+    },
+    "hsCode": {
+      "type": "string",
+      "description": "Harmonized System tariff code",
+      "pattern": "^[0-9]{4,10}$"
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confirmedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Port": {
+      "type": "object",
+      "required": ["portCode"],
+      "properties": {
+        "portCode": {
+          "type": "string",
+          "description": "UN/LOCODE port code (e.g., USLAX, CNSHA)",
+          "pattern": "^[A-Z]{2}[A-Z0-9]{3}$"
+        },
+        "portName": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "terminal": {
+          "type": "string"
+        }
+      }
+    },
+    "Vessel": {
+      "type": "object",
+      "properties": {
+        "vesselName": {
+          "type": "string"
+        },
+        "imoNumber": {
+          "type": "string",
+          "pattern": "^[0-9]{7}$",
+          "description": "IMO vessel identification number"
+        },
+        "callSign": {
+          "type": "string"
+        },
+        "flag": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        }
+      }
+    },
+    "TradeParty": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "Container": {
+      "type": "object",
+      "required": ["containerType"],
+      "properties": {
+        "containerNumber": {
+          "type": "string",
+          "description": "ISO 6346 container number",
+          "pattern": "^[A-Z]{4}[0-9]{7}$"
+        },
+        "containerType": {
+          "type": "string",
+          "description": "ISO container type code",
+          "enum": ["20GP", "40GP", "40HC", "45HC", "20RF", "40RF", "20OT", "40OT", "20FR", "40FR"]
+        },
+        "sealNumber": {
+          "type": "string"
+        },
+        "tare": {
+          "type": "number",
+          "description": "Container tare weight in kg"
+        },
+        "grossWeightKg": {
+          "type": "number",
+          "description": "Total gross weight including cargo in kg",
+          "minimum": 0
+        },
+        "cargoWeightKg": {
+          "type": "number",
+          "description": "Net cargo weight in kg",
+          "minimum": 0
+        },
+        "vgm": {
+          "type": "number",
+          "description": "Verified gross mass in kg (SOLAS requirement)",
+          "minimum": 0
+        },
+        "hazmat": {
+          "type": "boolean",
+          "description": "Whether container carries hazardous materials",
+          "default": false
+        },
+        "refrigerated": {
+          "type": "boolean",
+          "description": "Whether container is a refrigerated unit",
+          "default": false
+        },
+        "setTemperatureCelsius": {
+          "type": "number",
+          "description": "Required temperature for refrigerated containers"
+        }
+      }
+    }
+  }
+}
