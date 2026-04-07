@@ -24,12 +24,10 @@ tags:
     description: Ocean shipping booking management
   - name: Schedules
     description: Ocean carrier schedule lookup
-  - name: Rates
-    description: Ocean freight rate inquiries
-  - name: Tracking
-    description: Container and shipment tracking
   - name: Shipping Instructions
     description: Bill of lading shipping instructions
+  - name: Tracking
+    description: Container and shipment tracking
 paths:
   /bookings:
     get:
