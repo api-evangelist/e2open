@@ -1,0 +1,492 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: INTTRA Ocean Execution API (e2open)
+  description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce
+    platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track
+    and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
+  tags:
+  - E2open
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: e2open
+    baseUri: https://api.inttra.com/v1
+    description: INTTRA Ocean Execution API (e2open) HTTP API.
+    authentication:
+      type: bearer
+      token: '{{E2OPEN_TOKEN}}'
+    resources:
+    - name: bookings
+      path: /bookings
+      operations:
+      - name: listbookings
+        method: GET
+        description: List ocean bookings
+        inputParameters:
+        - name: carrier
+          in: query
+          type: string
+          description: Filter by carrier SCAC code
+        - name: status
+          in: query
+          type: string
+          description: Filter by booking status
+        - name: originPort
+          in: query
+          type: string
+          description: UN/LOCODE for origin port
+        - name: destinationPort
+          in: query
+          type: string
+          description: UN/LOCODE for destination port
+        - name: bookedAfter
+          in: query
+          type: string
+          description: Filter bookings created after this date (ISO 8601)
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createbooking
+        method: POST
+        description: Create an ocean booking
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bookings-bookingid
+      path: /bookings/{bookingId}
+      operations:
+      - name: getbooking
+        method: GET
+        description: Get booking details
+        inputParameters:
+        - name: bookingId
+          in: path
+          type: string
+          required: true
+          description: INTTRA booking identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: amendbooking
+        method: PUT
+        description: Amend an existing booking
+        inputParameters:
+        - name: bookingId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bookings-bookingid-cancel
+      path: /bookings/{bookingId}/cancel
+      operations:
+      - name: cancelbooking
+        method: POST
+        description: Cancel a booking
+        inputParameters:
+        - name: bookingId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: schedules
+      path: /schedules
+      operations:
+      - name: searchschedules
+        method: GET
+        description: Search ocean vessel schedules
+        inputParameters:
+        - name: originPort
+          in: query
+          type: string
+          required: true
+          description: UN/LOCODE origin port
+        - name: destinationPort
+          in: query
+          type: string
+          required: true
+          description: UN/LOCODE destination port
+        - name: departureAfter
+          in: query
+          type: string
+          description: Search from this departure date (ISO 8601)
+        - name: departureBefore
+          in: query
+          type: string
+        - name: carrier
+          in: query
+          type: string
+          description: Filter by carrier SCAC code
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tracking-containernumber
+      path: /tracking/{containerNumber}
+      operations:
+      - name: trackcontainer
+        method: GET
+        description: Track a container by number
+        inputParameters:
+        - name: containerNumber
+          in: path
+          type: string
+          required: true
+          description: ISO 6346 container number (e.g., MSCU1234567)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tracking-booking-bookingid
+      path: /tracking/booking/{bookingId}
+      operations:
+      - name: trackbooking
+        method: GET
+        description: Track shipment by booking reference
+        inputParameters:
+        - name: bookingId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shipping-instructions
+      path: /shipping-instructions
+      operations:
+      - name: submitshippinginstructions
+        method: POST
+        description: Submit shipping instructions (SI)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: e2open-rest
+    description: REST adapter for INTTRA Ocean Execution API (e2open).
+    resources:
+    - path: /bookings
+      name: listbookings
+      operations:
+      - method: GET
+        name: listbookings
+        description: List ocean bookings
+        call: e2open.listbookings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings
+      name: createbooking
+      operations:
+      - method: POST
+        name: createbooking
+        description: Create an ocean booking
+        call: e2open.createbooking
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings/{bookingId}
+      name: getbooking
+      operations:
+      - method: GET
+        name: getbooking
+        description: Get booking details
+        call: e2open.getbooking
+        with:
+          bookingId: rest.bookingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings/{bookingId}
+      name: amendbooking
+      operations:
+      - method: PUT
+        name: amendbooking
+        description: Amend an existing booking
+        call: e2open.amendbooking
+        with:
+          bookingId: rest.bookingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /bookings/{bookingId}/cancel
+      name: cancelbooking
+      operations:
+      - method: POST
+        name: cancelbooking
+        description: Cancel a booking
+        call: e2open.cancelbooking
+        with:
+          bookingId: rest.bookingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /schedules
+      name: searchschedules
+      operations:
+      - method: GET
+        name: searchschedules
+        description: Search ocean vessel schedules
+        call: e2open.searchschedules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tracking/{containerNumber}
+      name: trackcontainer
+      operations:
+      - method: GET
+        name: trackcontainer
+        description: Track a container by number
+        call: e2open.trackcontainer
+        with:
+          containerNumber: rest.containerNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /tracking/booking/{bookingId}
+      name: trackbooking
+      operations:
+      - method: GET
+        name: trackbooking
+        description: Track shipment by booking reference
+        call: e2open.trackbooking
+        with:
+          bookingId: rest.bookingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shipping-instructions
+      name: submitshippinginstructions
+      operations:
+      - method: POST
+        name: submitshippinginstructions
+        description: Submit shipping instructions (SI)
+        call: e2open.submitshippinginstructions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: e2open-mcp
+    transport: http
+    description: MCP adapter for INTTRA Ocean Execution API (e2open) for AI agent use.
+    tools:
+    - name: listbookings
+      description: List ocean bookings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: e2open.listbookings
+      with:
+        carrier: tools.carrier
+        status: tools.status
+        originPort: tools.originPort
+        destinationPort: tools.destinationPort
+        bookedAfter: tools.bookedAfter
+        limit: tools.limit
+        offset: tools.offset
+      inputParameters:
+      - name: carrier
+        type: string
+        description: Filter by carrier SCAC code
+      - name: status
+        type: string
+        description: Filter by booking status
+      - name: originPort
+        type: string
+        description: UN/LOCODE for origin port
+      - name: destinationPort
+        type: string
+        description: UN/LOCODE for destination port
+      - name: bookedAfter
+        type: string
+        description: Filter bookings created after this date (ISO 8601)
+      - name: limit
+        type: integer
+        description: limit
+      - name: offset
+        type: integer
+        description: offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createbooking
+      description: Create an ocean booking
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: e2open.createbooking
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getbooking
+      description: Get booking details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: e2open.getbooking
+      with:
+        bookingId: tools.bookingId
+      inputParameters:
+      - name: bookingId
+        type: string
+        description: INTTRA booking identifier
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amendbooking
+      description: Amend an existing booking
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: e2open.amendbooking
+      with:
+        bookingId: tools.bookingId
+      inputParameters:
+      - name: bookingId
+        type: string
+        description: bookingId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancelbooking
+      description: Cancel a booking
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: e2open.cancelbooking
+      with:
+        bookingId: tools.bookingId
+      inputParameters:
+      - name: bookingId
+        type: string
+        description: bookingId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchschedules
+      description: Search ocean vessel schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: e2open.searchschedules
+      with:
+        originPort: tools.originPort
+        destinationPort: tools.destinationPort
+        departureAfter: tools.departureAfter
+        departureBefore: tools.departureBefore
+        carrier: tools.carrier
+        limit: tools.limit
+      inputParameters:
+      - name: originPort
+        type: string
+        description: UN/LOCODE origin port
+        required: true
+      - name: destinationPort
+        type: string
+        description: UN/LOCODE destination port
+        required: true
+      - name: departureAfter
+        type: string
+        description: Search from this departure date (ISO 8601)
+      - name: departureBefore
+        type: string
+        description: departureBefore
+      - name: carrier
+        type: string
+        description: Filter by carrier SCAC code
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: trackcontainer
+      description: Track a container by number
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: e2open.trackcontainer
+      with:
+        containerNumber: tools.containerNumber
+      inputParameters:
+      - name: containerNumber
+        type: string
+        description: ISO 6346 container number (e.g., MSCU1234567)
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: trackbooking
+      description: Track shipment by booking reference
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: e2open.trackbooking
+      with:
+        bookingId: tools.bookingId
+      inputParameters:
+      - name: bookingId
+        type: string
+        description: bookingId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submitshippinginstructions
+      description: Submit shipping instructions (SI)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: e2open.submitshippinginstructions
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    E2OPEN_TOKEN: E2OPEN_TOKEN
