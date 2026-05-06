@@ -4,91 +4,45 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: e2open
 providerId: e2open
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the e2open API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Supply Chain
+  - Logistics
+description: e2open and the INTTRA ocean network do not publish a single canonical rate-limit specification.
+  Per-module APIs apply tenant-scoped throttles enforced at the API gateway; consumers should consult
+  the per-module developer guide and confirm thresholds with their account team.
+notes: No publicly documented rate-limit numbers. INTTRA developer documentation requires authentication
+  and partner agreement.
+sources:
+  - https://apidocs.inttra.com/
+  - https://www.e2open.com/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
+  quotaExceeded: 429
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - E2open Supply Chain Platform API
-      - INTTRA Ocean Execution API
-      - E2open Transportation Management API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - E2open Supply Chain Platform API
-      - INTTRA Ocean Execution API
-      - E2open Transportation Management API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - E2open Supply Chain Platform API
-      - INTTRA Ocean Execution API
-      - E2open Transportation Management API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - E2open Supply Chain Platform API
-      - INTTRA Ocean Execution API
-      - E2open Transportation Management API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - E2open Supply Chain Platform API
-      - INTTRA Ocean Execution API
-      - E2open Transportation Management API
+  - name: e2open Supply Chain API
+    scope: tenant
+    metric: varies
+    limit: see module docs
+  - name: INTTRA Ocean Execution API
+    scope: tenant
+    metric: varies
+    limit: see INTTRA developer portal
+  - name: Transportation Management API
+    scope: tenant
+    metric: varies
+    limit: see TM developer guide
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Token-based authentication
+    description: INTTRA APIs require an OAuth-style token from the identity service before each session;
+      tokens carry tenant-scope rate limits.
+  - name: Backoff
+    description: Implement exponential backoff with jitter; honor Retry-After when present.
+  - name: Negotiated thresholds
+    description: Higher thresholds available via the e2open / INTTRA account team and SOW.
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com

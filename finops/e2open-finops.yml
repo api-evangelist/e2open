@@ -1,152 +1,90 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: e2open
+providerId: e2open
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Supply Chain
+  - Logistics
+description: 'FOCUS-aligned FinOps for e2open: per-module SaaS subscription plus per-transaction meters
+  (bookings, shipments, customs filings) governed by the contract. Public per-call pricing is not published.'
+notes: e2open does not publish public API pricing. Reconcile FOCUS columns and per-meter rates against
+  the master subscription agreement.
+sources:
+  - https://www.e2open.com/
+  - https://apidocs.inttra.com/
+  - https://marketplace.e2open.com/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: e2open
-providerId: e2open
-publisherName: e2open
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the e2open API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: E2open, LLC
+serviceCategory: Supply Chain
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Subscription + Usage
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: e2open
-  ServiceCategory: Developer Tools / API
+  ServiceName: e2open Connected Network
+  ServiceCategory: Supply Chain
   ProviderName: e2open
-  PublisherName: e2open
-  InvoiceIssuerName: e2open
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: E2open, LLC
+  InvoiceIssuerName: E2open, LLC
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
   - name: api_requests
-    description: Count of billable API requests
     unit: request
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - module
+      - tenant
+  - name: ocean_bookings
+    unit: transaction
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - carrier
+      - lane
+  - name: shipments_tracked
+    unit: shipment
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: E2open Supply Chain Platform API
-    baseURL: https://api.e2open.com
-    tags:
-      - JSON
-      - Logistics
-      - REST
-      - Supply Chain
-      - Trade Management
-      - Visibility
-    serviceName: E2open Supply Chain Platform API
-    serviceCategory: API
-  - name: INTTRA Ocean Execution API
-    baseURL: https://api.inttra.com
-    tags:
-      - Booking
-      - JSON
-      - Logistics
-      - Ocean Shipping
-      - REST
-      - Supply Chain
-      - Track and Trace
-    serviceName: INTTRA Ocean Execution API
-    serviceCategory: API
-  - name: E2open Transportation Management API
-    baseURL: https://api.e2open.com
-    tags:
-      - Appointment Scheduling
-      - Carrier Integration
-      - Logistics
-      - Supply Chain
-      - Transportation
-    serviceName: E2open Transportation Management API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - mode
+      - region
+  - name: customs_filings
+    unit: filing
+    aggregation: sum
+    dimensions:
+      - country
+  - name: module_seats
+    unit: seat
+    aggregation: sum
+    dimensions:
+      - module
+principles:
+  - name: Visibility
+    description: Use the e2open Marketplace usage reports and per-module dashboards to see consumption;
+      pull invoice line items into FOCUS-formatted tables.
+  - name: Allocation
+    description: Tag bookings/shipments/filings with originating business unit; charge back module subscriptions
+      to owning logistics team.
+  - name: Optimization
+    description: Consolidate ocean carriers through INTTRA to leverage volume; reduce module count at
+      renewal where capabilities overlap.
+  - name: Accountability
+    description: Supply-chain operations owns the e2open subscription and reviews monthly usage against
+      forecast.
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
