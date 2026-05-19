@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: INTTRA Ocean Execution API (e2open) — Shipping Instructions
+  description: 'INTTRA Ocean Execution API (e2open) — Shipping Instructions. 1 operations. Lead operation: Submit shipping
+    instructions (SI). Self-contained Naftiko capability covering one E2open business surface.'
+  tags:
+  - E2open
+  - Shipping Instructions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    E2OPEN_API_KEY: E2OPEN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: inttra-ocean-execution-shipping-instructions
+    baseUri: https://api.inttra.com/v1
+    description: INTTRA Ocean Execution API (e2open) — Shipping Instructions business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: shipping-instructions
+      path: /shipping-instructions
+      operations:
+      - name: submitshippinginstructions
+        method: POST
+        description: Submit shipping instructions (SI)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.E2OPEN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: inttra-ocean-execution-shipping-instructions-rest
+    port: 8080
+    description: REST adapter for INTTRA Ocean Execution API (e2open) — Shipping Instructions. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/shipping-instructions
+      name: shipping-instructions
+      description: REST surface for shipping-instructions.
+      operations:
+      - method: POST
+        name: submitshippinginstructions
+        description: Submit shipping instructions (SI)
+        call: inttra-ocean-execution-shipping-instructions.submitshippinginstructions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: inttra-ocean-execution-shipping-instructions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for INTTRA Ocean Execution API (e2open) — Shipping Instructions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: submit-shipping-instructions-si
+      description: Submit shipping instructions (SI)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: inttra-ocean-execution-shipping-instructions.submitshippinginstructions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
