@@ -1,0 +1,1303 @@
+{
+  "item": [
+    {
+      "id": "22314bf6-861c-4309-9055-73161393a14f",
+      "name": "Bookings",
+      "description": {
+        "content": "Ocean shipping booking management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29496165-d4be-4dc0-be1d-3bdac05115b2",
+          "name": "List ocean bookings",
+          "request": {
+            "name": "List ocean bookings",
+            "description": {
+              "content": "Returns a list of ocean shipping bookings. Supports filtering by carrier, booking date, port of origin, port of destination, and booking status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "Filter by carrier SCAC code"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by booking status"
+                },
+                {
+                  "disabled": false,
+                  "key": "originPort",
+                  "value": "<string>",
+                  "description": "UN/LOCODE for origin port"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationPort",
+                  "value": "<string>",
+                  "description": "UN/LOCODE for destination port"
+                },
+                {
+                  "disabled": false,
+                  "key": "bookedAfter",
+                  "value": "<date>",
+                  "description": "Filter bookings created after this date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28408001-d0a1-4061-806d-3272f6d865e3",
+              "name": "List of ocean bookings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier",
+                      "value": "MAEU"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "originPort",
+                      "value": "USLAX"
+                    },
+                    {
+                      "key": "destinationPort",
+                      "value": "CNSHA"
+                    },
+                    {
+                      "key": "bookedAfter",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8348,\n  \"offset\": 3992,\n  \"bookings\": [\n    {\n      \"bookingId\": \"string\",\n      \"carrierBookingReference\": \"string\",\n      \"carrier\": \"string\",\n      \"status\": \"CONFIRMED\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"1994-08-27\",\n      \"eta\": \"1993-08-28\"\n    },\n    {\n      \"bookingId\": \"string\",\n      \"carrierBookingReference\": \"string\",\n      \"carrier\": \"string\",\n      \"status\": \"CONFIRMED\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"1958-05-14\",\n      \"eta\": \"2015-09-17\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeddaf09-245f-4a14-8796-89e571b7c696",
+              "name": "Missing or invalid bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier",
+                      "value": "MAEU"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "originPort",
+                      "value": "USLAX"
+                    },
+                    {
+                      "key": "destinationPort",
+                      "value": "CNSHA"
+                    },
+                    {
+                      "key": "bookedAfter",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2e5e480-e1e8-4517-8a85-98afbec2dd78",
+          "name": "Create an ocean booking",
+          "request": {
+            "name": "Create an ocean booking",
+            "description": {
+              "content": "Submits a new ocean booking request to the specified carrier through the INTTRA network. Returns a booking confirmation with carrier booking reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"etd\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weightKg\": \"<number>\"\n    }\n  ],\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"commodity\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b803258-8771-44df-8f87-fb3a924a3edc",
+              "name": "Booking submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"etd\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"40RF\",\n      \"quantity\": 753,\n      \"weightKg\": 1471.848170190293\n    }\n  ],\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"BJ\",\n    \"email\": \"Ssid0Gdd@ZOCUOMvRlwRmopWrBUJqnq.nfg\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"FL\",\n    \"email\": \"88dAxkE2Ot0E@mHUPK.bu\",\n    \"phone\": \"string\"\n  },\n  \"commodity\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"carrierBookingReference\": \"string\",\n  \"carrier\": \"string\",\n  \"status\": \"AMENDED\",\n  \"originPort\": \"string\",\n  \"destinationPort\": \"string\",\n  \"etd\": \"1986-04-08\",\n  \"eta\": \"1946-10-31\",\n  \"booker\": {\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"OB\",\n    \"email\": \"4kHOLneL73q@ymceiCZ.uxr\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"MK\",\n    \"email\": \"3jT@ELHXNSGEUpWOlulktSWxFxlNjxqSw.zgbj\",\n    \"phone\": \"string\"\n  },\n  \"containers\": [\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 3517.490413534393\n    },\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 2618.2623915909085\n    }\n  ],\n  \"commodity\": \"string\",\n  \"vessel\": {\n    \"vesselName\": \"string\",\n    \"imoNumber\": \"0268378\",\n    \"callSign\": \"string\"\n  },\n  \"voyage\": \"string\",\n  \"submittedAt\": \"2026-03-29T04:08:03.768Z\",\n  \"confirmedAt\": \"2007-05-13T05:18:12.902Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38291854-e8f1-475f-b0fa-4850e2900398",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier\": \"<string>\",\n  \"originPort\": \"<string>\",\n  \"destinationPort\": \"<string>\",\n  \"etd\": \"<date>\",\n  \"containers\": [\n    {\n      \"containerType\": \"40RF\",\n      \"quantity\": 753,\n      \"weightKg\": 1471.848170190293\n    }\n  ],\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"BJ\",\n    \"email\": \"Ssid0Gdd@ZOCUOMvRlwRmopWrBUJqnq.nfg\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"FL\",\n    \"email\": \"88dAxkE2Ot0E@mHUPK.bu\",\n    \"phone\": \"string\"\n  },\n  \"commodity\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f7f2c19-4907-4561-8498-d79225e090e8",
+          "name": "Get booking details",
+          "request": {
+            "name": "Get booking details",
+            "description": {
+              "content": "Returns full details for a specific ocean booking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                ":bookingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bookingId",
+                  "description": "(Required) INTTRA booking identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fdd185a-3baa-4eb1-83f6-8deaaa33ab6c",
+              "name": "Booking details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    ":bookingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) INTTRA booking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"carrierBookingReference\": \"string\",\n  \"carrier\": \"string\",\n  \"status\": \"AMENDED\",\n  \"originPort\": \"string\",\n  \"destinationPort\": \"string\",\n  \"etd\": \"1986-04-08\",\n  \"eta\": \"1946-10-31\",\n  \"booker\": {\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"OB\",\n    \"email\": \"4kHOLneL73q@ymceiCZ.uxr\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"MK\",\n    \"email\": \"3jT@ELHXNSGEUpWOlulktSWxFxlNjxqSw.zgbj\",\n    \"phone\": \"string\"\n  },\n  \"containers\": [\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 3517.490413534393\n    },\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 2618.2623915909085\n    }\n  ],\n  \"commodity\": \"string\",\n  \"vessel\": {\n    \"vesselName\": \"string\",\n    \"imoNumber\": \"0268378\",\n    \"callSign\": \"string\"\n  },\n  \"voyage\": \"string\",\n  \"submittedAt\": \"2026-03-29T04:08:03.768Z\",\n  \"confirmedAt\": \"2007-05-13T05:18:12.902Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aede9239-6557-440b-90af-acf20ba4648a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    ":bookingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) INTTRA booking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8432eac-2f16-455b-91b1-b2554a994e1c",
+          "name": "Amend an existing booking",
+          "request": {
+            "name": "Amend an existing booking",
+            "description": {
+              "content": "Modifies an existing ocean booking. Subject to carrier acceptance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                ":bookingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bookingId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"containers\": [\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weightKg\": \"<number>\"\n    },\n    {\n      \"containerType\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weightKg\": \"<number>\"\n    }\n  ],\n  \"etd\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62ab9559-4bab-4a8e-99f2-66a8b814f38f",
+              "name": "Booking amendment submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    ":bookingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers\": [\n    {\n      \"containerType\": \"20GP\",\n      \"quantity\": 6873,\n      \"weightKg\": 7930.351229912435\n    },\n    {\n      \"containerType\": \"20RF\",\n      \"quantity\": 8684,\n      \"weightKg\": 8792.425019805172\n    }\n  ],\n  \"etd\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"carrierBookingReference\": \"string\",\n  \"carrier\": \"string\",\n  \"status\": \"AMENDED\",\n  \"originPort\": \"string\",\n  \"destinationPort\": \"string\",\n  \"etd\": \"1986-04-08\",\n  \"eta\": \"1946-10-31\",\n  \"booker\": {\n    \"name\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"OB\",\n    \"email\": \"4kHOLneL73q@ymceiCZ.uxr\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"MK\",\n    \"email\": \"3jT@ELHXNSGEUpWOlulktSWxFxlNjxqSw.zgbj\",\n    \"phone\": \"string\"\n  },\n  \"containers\": [\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 3517.490413534393\n    },\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"20OT\",\n      \"sealNumber\": \"string\",\n      \"weightKg\": 2618.2623915909085\n    }\n  ],\n  \"commodity\": \"string\",\n  \"vessel\": {\n    \"vesselName\": \"string\",\n    \"imoNumber\": \"0268378\",\n    \"callSign\": \"string\"\n  },\n  \"voyage\": \"string\",\n  \"submittedAt\": \"2026-03-29T04:08:03.768Z\",\n  \"confirmedAt\": \"2007-05-13T05:18:12.902Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b21aca9-0483-43a3-a707-89945e3e9b70",
+          "name": "Cancel a booking",
+          "request": {
+            "name": "Cancel a booking",
+            "description": {
+              "content": "Cancels an ocean booking. Subject to carrier cancellation policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bookings",
+                ":bookingId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bookingId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "03d08b2e-0427-4d51-97a2-6f77d4ea74bd",
+              "name": "Booking cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bookings",
+                    ":bookingId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b0354eb5-0199-47fb-8535-99250f57426e",
+      "name": "Schedules",
+      "description": {
+        "content": "Ocean carrier schedule lookup",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d2c04bd-7228-48dc-ae4e-a7f784c4958b",
+          "name": "Search ocean vessel schedules",
+          "request": {
+            "name": "Search ocean vessel schedules",
+            "description": {
+              "content": "Returns vessel sailing schedules from origin to destination port. Supports filtering by carrier, vessel, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "originPort",
+                  "value": "<string>",
+                  "description": "(Required) UN/LOCODE origin port"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationPort",
+                  "value": "<string>",
+                  "description": "(Required) UN/LOCODE destination port"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureAfter",
+                  "value": "<date>",
+                  "description": "Search from this departure date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "departureBefore",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "Filter by carrier SCAC code"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61986e57-92cc-476d-825d-6121571a3f58",
+              "name": "Ocean schedules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "originPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departureAfter",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "departureBefore",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4216,\n  \"schedules\": [\n    {\n      \"carrier\": \"string\",\n      \"carrierName\": \"string\",\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"8690613\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"1958-10-10T16:22:19.427Z\",\n      \"eta\": \"1951-03-15T11:46:49.443Z\",\n      \"transitTimeDays\": 6947,\n      \"cutoffDateTime\": \"2003-08-06T03:14:26.378Z\",\n      \"availableEquipment\": [\n        \"40RF\",\n        \"20GP\"\n      ]\n    },\n    {\n      \"carrier\": \"string\",\n      \"carrierName\": \"string\",\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"1126721\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"1973-05-10T11:09:43.222Z\",\n      \"eta\": \"1996-07-17T06:26:18.735Z\",\n      \"transitTimeDays\": 1763,\n      \"cutoffDateTime\": \"2020-09-05T21:04:08.801Z\",\n      \"availableEquipment\": [\n        \"20RF\",\n        \"20RF\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bc766f59-011c-49d3-a710-b4fdeccd6df0",
+      "name": "Shipping Instructions",
+      "description": {
+        "content": "Bill of lading shipping instructions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fda87365-988f-4af7-9b25-096d18f9b71d",
+          "name": "Submit shipping instructions (SI)",
+          "request": {
+            "name": "Submit shipping instructions (SI)",
+            "description": {
+              "content": "Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed booking. Includes cargo description, consignee, notify parties, and special instructions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipping-instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e309d465-cf69-4532-894c-d0c041bbfbc4",
+              "name": "Shipping instructions submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipping-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"TO\",\n    \"email\": \"v2L@uqyxxliBqaiBtWRcLWtFNffoxtTgx.lvlj\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"GR\",\n    \"email\": \"929-y@bZTKDSZvYMojgQKqnXYL.udpv\",\n    \"phone\": \"string\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"FF\",\n    \"email\": \"caKO@KuCKQJ.kag\",\n    \"phone\": \"string\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"JY\",\n    \"email\": \"5JTdPmE@yrDRaDZbfKkiINzyskDuv.yiur\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"NY\",\n    \"email\": \"EFFbom@ilVTdgsKWgWGZNtK.uhe\",\n    \"phone\": \"string\"\n  },\n  \"cargoDescription\": \"string\",\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"UD\",\n    \"email\": \"cQdz1z9ZufCnsc@hCpXCqaU.meh\",\n    \"phone\": \"string\"\n  },\n  \"hsCode\": \"string\",\n  \"grossWeightKg\": 7189.21192891752,\n  \"numberOfPackages\": 7712,\n  \"packageType\": \"string\",\n  \"marksAndNumbers\": \"string\",\n  \"specialInstructions\": \"string\",\n  \"siReference\": \"string\",\n  \"status\": \"REJECTED\",\n  \"submittedAt\": \"1961-02-08T10:14:30.681Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "44945af3-e7ab-467f-9adf-11b961083362",
+      "name": "Tracking",
+      "description": {
+        "content": "Container and shipment tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea7e076b-4206-4591-a68a-75ea4868d8d3",
+          "name": "Track a container by number",
+          "request": {
+            "name": "Track a container by number",
+            "description": {
+              "content": "Returns current location, status, and event history for a specific container. Provides real-time tracking from all INTTRA carrier partners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                ":containerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "containerNumber",
+                  "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a734903c-fd90-4230-bf7f-a787d200ce99",
+              "name": "Container tracking information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":containerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerNumber",
+                      "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"containerNumber\": \"string\",\n  \"containerType\": \"string\",\n  \"status\": \"RETURNED\",\n  \"currentLocation\": {\n    \"portCode\": \"string\",\n    \"portName\": \"string\",\n    \"country\": \"string\"\n  },\n  \"vessel\": {\n    \"vesselName\": \"string\",\n    \"imoNumber\": \"9174333\",\n    \"callSign\": \"string\"\n  },\n  \"events\": [\n    {\n      \"eventType\": \"TRANSSHIPMENT\",\n      \"eventDescription\": \"string\",\n      \"location\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"eventDateTime\": \"1992-03-13T05:46:59.308Z\",\n      \"isActual\": true,\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"9918991\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\"\n    },\n    {\n      \"eventType\": \"GATE_OUT\",\n      \"eventDescription\": \"string\",\n      \"location\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"eventDateTime\": \"1950-03-07T01:46:47.967Z\",\n      \"isActual\": false,\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"1880441\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea9c14a1-db1f-4a59-9190-be6dccea299b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":containerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerNumber",
+                      "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "247966ae-fe35-42c3-ad57-0dbbf96a081e",
+          "name": "Track shipment by booking reference",
+          "request": {
+            "name": "Track shipment by booking reference",
+            "description": {
+              "content": "Returns tracking events for all containers in a booking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "booking",
+                ":bookingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bookingId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ead4c77a-81a8-4182-8d6f-0a22e83a8517",
+              "name": "Booking tracking information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "booking",
+                    ":bookingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"containers\": [\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"string\",\n      \"status\": \"ARRIVED\",\n      \"currentLocation\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"4662472\",\n        \"callSign\": \"string\"\n      },\n      \"events\": [\n        {\n          \"eventType\": \"IN_TRANSIT\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1963-06-26T21:19:21.613Z\",\n          \"isActual\": true,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"3402818\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        },\n        {\n          \"eventType\": \"LOADED\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1984-08-17T08:19:50.068Z\",\n          \"isActual\": true,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"2265426\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        }\n      ]\n    },\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"string\",\n      \"status\": \"GATE_OUT\",\n      \"currentLocation\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"7508924\",\n        \"callSign\": \"string\"\n      },\n      \"events\": [\n        {\n          \"eventType\": \"TRANSSHIPMENT\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"2004-12-11T08:43:26.339Z\",\n          \"isActual\": true,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"9848816\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        },\n        {\n          \"eventType\": \"IN_TRANSIT\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1974-05-13T19:13:24.145Z\",\n          \"isActual\": false,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"3004854\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.inttra.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2afc0e01-99ea-4764-af05-1c6393aefddf",
+    "name": "INTTRA Ocean Execution API (e2open)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
+      "type": "text/plain"
+    }
+  }
+}
