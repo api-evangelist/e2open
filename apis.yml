@@ -68,6 +68,12 @@ apis:
       capabilities. REST endpoints allow carriers to POST documents, retrieve current rates, manage load stop details,
       and communicate appointment status updates with supply chain stakeholders.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/e2open-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/e2open-domain-security.yml
+  - type: Authentication
+    url: authentication/e2open-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/e2open
   - type: LinkedIn
