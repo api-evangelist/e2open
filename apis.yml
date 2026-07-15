@@ -68,6 +68,8 @@ apis:
       capabilities. REST endpoints allow carriers to POST documents, retrieve current rates, manage load stop details,
       and communicate appointment status updates with supply chain stakeholders.
 common:
+  - type: AgenticAccess
+    url: agentic-access/e2open-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/e2open-vulnerability-disclosure.yml
   - type: DomainSecurity
