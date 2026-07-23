@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: INTTRA Ocean Execution API (e2open) Bookings Shipping Instructions API
+  description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
+  version: 1.0.0
+  contact:
+    name: INTTRA / e2open Support
+    url: https://knowledge.e2open.com/knowledgecenter/inttra-resources/
+  license:
+    name: e2open Terms
+    url: https://www.inttra.com/legal/
+servers:
+- url: https://api.inttra.com/v1
+  description: INTTRA Ocean Execution API Production
+security:
+- bearerAuth: []
+tags:
+- name: Shipping Instructions
+  description: Bill of lading shipping instructions
+paths:
+  /shipping-instructions:
+    post:
+      operationId: submitShippingInstructions
+      summary: Submit shipping instructions (SI)
+      description: Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed booking. Includes cargo description, consignee, notify parties, and special instructions.
+      tags:
+      - Shipping Instructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingInstructionsRequest'
+      responses:
+        '201':
+          description: Shipping instructions submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingInstructions'
+components:
+  schemas:
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: ^[A-Z]{2}$
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    ShippingInstructionsRequest:
+      type: object
+      required:
+      - bookingId
+      - shipper
+      - consignee
+      - cargoDescription
+      properties:
+        bookingId:
+          type: string
+        shipper:
+          $ref: '#/components/schemas/TradeParty'
+        consignee:
+          $ref: '#/components/schemas/TradeParty'
+        notifyParty:
+          $ref: '#/components/schemas/TradeParty'
+        cargoDescription:
+          type: string
+        hsCode:
+          type: string
+          description: Harmonized System tariff code
+        grossWeightKg:
+          type: number
+        numberOfPackages:
+          type: integer
+        packageType:
+          type: string
+        marksAndNumbers:
+          type: string
+        specialInstructions:
+          type: string
+    ShippingInstructions:
+      allOf:
+      - $ref: '#/components/schemas/ShippingInstructionsRequest'
+      - type: object
+        properties:
+          siReference:
+            type: string
+          status:
+            type: string
+            enum:
+            - SUBMITTED
+            - ACCEPTED
+            - REJECTED
+            - PROCESSED
+          submittedAt:
+            type: string
+            format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the INTTRA identity service

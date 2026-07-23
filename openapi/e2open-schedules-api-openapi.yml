@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: INTTRA Ocean Execution API (e2open) Bookings Schedules API
+  description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
+  version: 1.0.0
+  contact:
+    name: INTTRA / e2open Support
+    url: https://knowledge.e2open.com/knowledgecenter/inttra-resources/
+  license:
+    name: e2open Terms
+    url: https://www.inttra.com/legal/
+servers:
+- url: https://api.inttra.com/v1
+  description: INTTRA Ocean Execution API Production
+security:
+- bearerAuth: []
+tags:
+- name: Schedules
+  description: Ocean carrier schedule lookup
+paths:
+  /schedules:
+    get:
+      operationId: searchSchedules
+      summary: Search ocean vessel schedules
+      description: Returns vessel sailing schedules from origin to destination port. Supports filtering by carrier, vessel, and date range.
+      tags:
+      - Schedules
+      parameters:
+      - name: originPort
+        in: query
+        required: true
+        description: UN/LOCODE origin port
+        schema:
+          type: string
+      - name: destinationPort
+        in: query
+        required: true
+        description: UN/LOCODE destination port
+        schema:
+          type: string
+      - name: departureAfter
+        in: query
+        description: Search from this departure date (ISO 8601)
+        schema:
+          type: string
+          format: date
+      - name: departureBefore
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: carrier
+        in: query
+        description: Filter by carrier SCAC code
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: Ocean schedules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleList'
+components:
+  schemas:
+    Schedule:
+      type: object
+      properties:
+        carrier:
+          type: string
+        carrierName:
+          type: string
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        voyage:
+          type: string
+        originPort:
+          type: string
+        destinationPort:
+          type: string
+        etd:
+          type: string
+          format: date-time
+        eta:
+          type: string
+          format: date-time
+        transitTimeDays:
+          type: integer
+        cutoffDateTime:
+          type: string
+          format: date-time
+          description: Documentation and cargo cutoff
+        availableEquipment:
+          type: array
+          items:
+            type: string
+            enum:
+            - 20GP
+            - 40GP
+            - 40HC
+            - 45HC
+            - 20RF
+            - 40RF
+    ScheduleList:
+      type: object
+      properties:
+        total:
+          type: integer
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the INTTRA identity service

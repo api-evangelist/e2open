@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: INTTRA Ocean Execution API (e2open) Bookings Tracking API
+  description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
+  version: 1.0.0
+  contact:
+    name: INTTRA / e2open Support
+    url: https://knowledge.e2open.com/knowledgecenter/inttra-resources/
+  license:
+    name: e2open Terms
+    url: https://www.inttra.com/legal/
+servers:
+- url: https://api.inttra.com/v1
+  description: INTTRA Ocean Execution API Production
+security:
+- bearerAuth: []
+tags:
+- name: Tracking
+  description: Container and shipment tracking
+paths:
+  /tracking/{containerNumber}:
+    get:
+      operationId: trackContainer
+      summary: Track a container by number
+      description: Returns current location, status, and event history for a specific container. Provides real-time tracking from all INTTRA carrier partners.
+      tags:
+      - Tracking
+      parameters:
+      - name: containerNumber
+        in: path
+        required: true
+        description: ISO 6346 container number (e.g., MSCU1234567)
+        schema:
+          type: string
+          pattern: ^[A-Z]{4}[0-9]{7}$
+      responses:
+        '200':
+          description: Container tracking information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerTracking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tracking/booking/{bookingId}:
+    get:
+      operationId: trackBooking
+      summary: Track shipment by booking reference
+      description: Returns tracking events for all containers in a booking.
+      tags:
+      - Tracking
+      parameters:
+      - name: bookingId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Booking tracking information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookingId:
+                    type: string
+                  containers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ContainerTracking'
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
+    ContainerTracking:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+        status:
+          type: string
+          enum:
+          - EMPTY
+          - GATE_IN
+          - LOADED
+          - DEPARTED
+          - IN_TRANSIT
+          - ARRIVED
+          - GATE_OUT
+          - RETURNED
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+    Location:
+      type: object
+      properties:
+        portCode:
+          type: string
+          description: UN/LOCODE
+        portName:
+          type: string
+        country:
+          type: string
+    TrackingEvent:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum:
+          - GATE_IN
+          - LOADED
+          - DEPARTED
+          - IN_TRANSIT
+          - ARRIVED
+          - GATE_OUT
+          - EMPTY_RETURN
+          - TRANSSHIPMENT
+        eventDescription:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        eventDateTime:
+          type: string
+          format: date-time
+        isActual:
+          type: boolean
+          description: true if actual event, false if estimated
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        voyage:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the INTTRA identity service
