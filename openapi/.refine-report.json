@@ -1,0 +1,20 @@
+{
+  "provider": "e2open",
+  "sources": [
+    "e2open-bookings-api-openapi.yml",
+    "e2open-schedules-api-openapi.yml",
+    "e2open-shipping-instructions-api-openapi.yml",
+    "e2open-tracking-api-openapi.yml"
+  ],
+  "outputs": [
+    "e2open-bookings-api-openapi.yml",
+    "e2open-schedules-api-openapi.yml",
+    "e2open-shipping-instructions-api-openapi.yml",
+    "e2open-tracking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
