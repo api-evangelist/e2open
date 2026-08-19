@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "INTTRA Ocean Execution API (e2open) Bookings Shipping Instructions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipping Instructions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit shipping instructions (SI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.inttra.com/v1/shipping-instructions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed booking. Includes cargo description, consignee, notify parties, and special instructions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

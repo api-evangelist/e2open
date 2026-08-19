@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "INTTRA Ocean Execution API (e2open) Bookings Schedules API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search ocean vessel schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.inttra.com/v1/schedules",
+            "params": [
+              {
+                "name": "originPort",
+                "value": "",
+                "type": "query",
+                "description": "UN/LOCODE origin port"
+              },
+              {
+                "name": "destinationPort",
+                "value": "",
+                "type": "query",
+                "description": "UN/LOCODE destination port"
+              },
+              {
+                "name": "departureAfter",
+                "value": "",
+                "type": "query",
+                "description": "Search from this departure date (ISO 8601)"
+              },
+              {
+                "name": "departureBefore",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "Filter by carrier SCAC code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns vessel sailing schedules from origin to destination port. Supports filtering by carrier, vessel, and date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "INTTRA Ocean Execution API (e2open) Bookings Tracking API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track a container by number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.inttra.com/v1/tracking/:containerNumber",
+            "params": [
+              {
+                "name": "containerNumber",
+                "value": "",
+                "type": "path",
+                "description": "ISO 6346 container number (e.g., MSCU1234567)"
+              }
+            ]
+          },
+          "docs": "Returns current location, status, and event history for a specific container. Provides real-time tracking from all INTTRA carrier partners."
+        },
+        {
+          "info": {
+            "name": "Track shipment by booking reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.inttra.com/v1/tracking/booking/:bookingId",
+            "params": [
+              {
+                "name": "bookingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns tracking events for all containers in a booking."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

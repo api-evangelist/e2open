@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "INTTRA Ocean Execution API (e2open) Bookings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bookings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ocean bookings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.inttra.com/v1/bookings",
+            "params": [
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "Filter by carrier SCAC code"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by booking status"
+              },
+              {
+                "name": "originPort",
+                "value": "",
+                "type": "query",
+                "description": "UN/LOCODE for origin port"
+              },
+              {
+                "name": "destinationPort",
+                "value": "",
+                "type": "query",
+                "description": "UN/LOCODE for destination port"
+              },
+              {
+                "name": "bookedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter bookings created after this date (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of ocean shipping bookings. Supports filtering by carrier, booking date, port of origin, port of destination, and booking status."
+        },
+        {
+          "info": {
+            "name": "Create an ocean booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.inttra.com/v1/bookings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new ocean booking request to the specified carrier through the INTTRA network. Returns a booking confirmation with carrier booking reference."
+        },
+        {
+          "info": {
+            "name": "Get booking details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.inttra.com/v1/bookings/:bookingId",
+            "params": [
+              {
+                "name": "bookingId",
+                "value": "",
+                "type": "path",
+                "description": "INTTRA booking identifier"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific ocean booking."
+        },
+        {
+          "info": {
+            "name": "Amend an existing booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.inttra.com/v1/bookings/:bookingId",
+            "params": [
+              {
+                "name": "bookingId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing ocean booking. Subject to carrier acceptance."
+        },
+        {
+          "info": {
+            "name": "Cancel a booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.inttra.com/v1/bookings/:bookingId/cancel",
+            "params": [
+              {
+                "name": "bookingId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an ocean booking. Subject to carrier cancellation policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

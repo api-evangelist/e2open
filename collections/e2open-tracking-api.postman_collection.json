@@ -1,0 +1,287 @@
+{
+  "item": [
+    {
+      "id": "53c4c7a3-b479-4bcd-b82e-4a81d6b6e55f",
+      "name": "Tracking",
+      "description": {
+        "content": "Container and shipment tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ae7c35c-b645-477c-a62d-fa5392d67aa5",
+          "name": "Track a container by number",
+          "request": {
+            "name": "Track a container by number",
+            "description": {
+              "content": "Returns current location, status, and event history for a specific container. Provides real-time tracking from all INTTRA carrier partners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                ":containerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "containerNumber",
+                  "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1145b2e9-e3a3-4d85-9103-2afdc42a85f4",
+              "name": "Container tracking information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":containerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerNumber",
+                      "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"containerNumber\": \"string\",\n  \"containerType\": \"string\",\n  \"status\": \"ARRIVED\",\n  \"currentLocation\": {\n    \"portCode\": \"string\",\n    \"portName\": \"string\",\n    \"country\": \"string\"\n  },\n  \"vessel\": {\n    \"vesselName\": \"string\",\n    \"imoNumber\": \"1076835\",\n    \"callSign\": \"string\"\n  },\n  \"events\": [\n    {\n      \"eventType\": \"GATE_IN\",\n      \"eventDescription\": \"string\",\n      \"location\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"eventDateTime\": \"2013-04-15T00:17:42.059Z\",\n      \"isActual\": true,\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"3875721\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\"\n    },\n    {\n      \"eventType\": \"TRANSSHIPMENT\",\n      \"eventDescription\": \"string\",\n      \"location\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"eventDateTime\": \"1963-12-19T15:03:54.326Z\",\n      \"isActual\": false,\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"0532442\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "585d84c8-02cb-452a-9c15-3ae64d418aa2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":containerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "containerNumber",
+                      "description": "(Required) ISO 6346 container number (e.g., MSCU1234567)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb6caa87-9083-4800-b1ba-d2c62ec66771",
+          "name": "Track shipment by booking reference",
+          "request": {
+            "name": "Track shipment by booking reference",
+            "description": {
+              "content": "Returns tracking events for all containers in a booking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "booking",
+                ":bookingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bookingId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cddf6798-4ab7-41f1-8e7f-d099e5878872",
+              "name": "Booking tracking information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "booking",
+                    ":bookingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bookingId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookingId\": \"string\",\n  \"containers\": [\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"string\",\n      \"status\": \"DEPARTED\",\n      \"currentLocation\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"5831805\",\n        \"callSign\": \"string\"\n      },\n      \"events\": [\n        {\n          \"eventType\": \"GATE_IN\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1968-10-04T03:31:14.088Z\",\n          \"isActual\": false,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"8745900\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        },\n        {\n          \"eventType\": \"DEPARTED\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1984-05-05T00:27:57.305Z\",\n          \"isActual\": true,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"1379876\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        }\n      ]\n    },\n    {\n      \"containerNumber\": \"string\",\n      \"containerType\": \"string\",\n      \"status\": \"GATE_IN\",\n      \"currentLocation\": {\n        \"portCode\": \"string\",\n        \"portName\": \"string\",\n        \"country\": \"string\"\n      },\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"2603627\",\n        \"callSign\": \"string\"\n      },\n      \"events\": [\n        {\n          \"eventType\": \"IN_TRANSIT\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"1971-10-04T06:00:06.743Z\",\n          \"isActual\": false,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"3516578\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        },\n        {\n          \"eventType\": \"GATE_IN\",\n          \"eventDescription\": \"string\",\n          \"location\": {\n            \"portCode\": \"string\",\n            \"portName\": \"string\",\n            \"country\": \"string\"\n          },\n          \"eventDateTime\": \"2014-01-15T04:16:01.420Z\",\n          \"isActual\": false,\n          \"vessel\": {\n            \"vesselName\": \"string\",\n            \"imoNumber\": \"0797287\",\n            \"callSign\": \"string\"\n          },\n          \"voyage\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.inttra.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a84a35b-731e-4f79-a070-66829551b2e3",
+    "name": "INTTRA Ocean Execution API (e2open) Bookings Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
+      "type": "text/plain"
+    }
+  }
+}
