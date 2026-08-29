@@ -130,6 +130,9 @@ apis:
   - type: GettingStarted
     url: https://www.inttra.com/services/integration/
 common:
+  - type: CapabilityMap
+    url: capabilities/e2open-capability-edges.yml
+    name: e2open Business Capability Map
   - type: AgenticAccess
     url: agentic-access/e2open-agentic-access.yml
   - type: VulnerabilityDisclosure

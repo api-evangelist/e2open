@@ -1,0 +1,47 @@
+slug: e2open
+provider: e2open
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Tracking
+  spec_file: e2open-tracking-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.9
+  evidence: GET /tracking/{containerNumber} trackContainer 'Track a container by number'; GET /tracking/booking/{bookingId}
+    'Track shipment by booking reference'; schemas ContainerTracking, TrackingEvent, Location
+  reason: Resolution and delivery of container and shipment status across an ocean carrier network is
+    Shipment Tracking Management under Shipment Visibility & Tracking.
+- tag: Bookings
+  spec_file: e2open-bookings-api-openapi.yml
+  capability_id: BC-2400.40
+  capability_id_l1: BC-2400
+  capability_name: Booking and Reservation Management
+  confidence: 0.85
+  evidence: POST /bookings createBooking 'Create an ocean booking'; PUT /bookings/{bookingId} 'Amend an
+    existing booking'; POST /bookings/{bookingId}/cancel 'Cancel a booking'
+  reason: Acceptance, amendment and cancellation of ocean carrier bookings against vessel capacity is
+    squarely Booking and Reservation Management within Freight Capacity Management; schemas Vessel, ContainerRequest,
+    TradeParty confirm ocean freight booking.
+- tag: Shipping Instructions
+  spec_file: e2open-shipping-instructions-api-openapi.yml
+  capability_id: BC-2500
+  capability_id_l1: BC-2500
+  capability_name: Cargo Documentation Management
+  confidence: 0.75
+  evidence: POST /shipping-instructions submitShippingInstructions 'Submit shipping instructions (SI)';
+    schemas ShippingInstructions, TradeParty
+  reason: Submission of ocean shipping instructions is the document-lifecycle step that drives bill-of-lading
+    issuance, so Cargo Documentation Management is the right L1; the evidence does not clearly name the
+    B/L sub-capability, so no L2.
