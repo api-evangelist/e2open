@@ -36,7 +36,6 @@ apis:
   - Supply Chain
   - Trade Management
   - Visibility
-  image: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/image.png
   humanURL: https://www.e2open.com/
   baseURL: https://api.e2open.com
   properties:
@@ -55,7 +54,6 @@ apis:
   - Logistics
   - Supply Chain
   - Transportation
-  image: https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/image.png
   humanURL: https://marketplace.e2open.com/
   baseURL: https://api.e2open.com
   properties:
