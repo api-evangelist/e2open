@@ -69,6 +69,8 @@ apis:
   humanURL: https://www.e2open.com/
   baseURL: https://api.e2open.com
   tags:
+  - Booking
+  tags_raw:
   - Bookings
   properties:
   - type: OpenAPI
@@ -85,6 +87,8 @@ apis:
   humanURL: https://www.e2open.com/
   baseURL: https://api.e2open.com
   tags:
+  - Schedule
+  tags_raw:
   - Schedules
   properties:
   - type: OpenAPI
@@ -171,6 +175,11 @@ specificationVersion: '0.23'
 description: Supply chain software with a connected network and SaaS platform help you seize opportunities,
   predict disruptions, and drive efficiency and sustainability.
 tags:
+- Logistics
+- Supply Chain
+- Transportation
+- Booking
+tags_raw:
 - Logistics
 - Supply Chain
 - Transportation
