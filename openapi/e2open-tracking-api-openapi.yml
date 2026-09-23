@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: INTTRA Ocean Execution API (e2open) Bookings Tracking API
+  title: INTTRA Ocean Execution API (e2open) Tracking API
   description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
   version: 1.0.0
   contact:
@@ -70,23 +70,15 @@ paths:
                     items:
                       $ref: '#/components/schemas/ContainerTracking'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Vessel:
+    Error:
       type: object
       properties:
-        vesselName:
+        code:
           type: string
-        imoNumber:
+        message:
           type: string
-          pattern: ^[0-9]{7}$
-        callSign:
+        details:
           type: string
     ContainerTracking:
       type: object
@@ -114,16 +106,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrackingEvent'
-    Location:
-      type: object
-      properties:
-        portCode:
-          type: string
-          description: UN/LOCODE
-        portName:
-          type: string
-        country:
-          type: string
     TrackingEvent:
       type: object
       properties:
@@ -152,15 +134,33 @@ components:
           $ref: '#/components/schemas/Vessel'
         voyage:
           type: string
-    Error:
+    Location:
       type: object
       properties:
-        code:
+        portCode:
           type: string
-        message:
+          description: UN/LOCODE
+        portName:
           type: string
-        details:
+        country:
           type: string
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

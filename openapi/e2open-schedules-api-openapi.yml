@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: INTTRA Ocean Execution API (e2open) Bookings Schedules API
+  title: INTTRA Ocean Execution API (e2open) Schedules API
   description: INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.
   version: 1.0.0
   contact:
@@ -68,6 +68,25 @@ paths:
                 $ref: '#/components/schemas/ScheduleList'
 components:
   schemas:
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
+    ScheduleList:
+      type: object
+      properties:
+        total:
+          type: integer
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
     Schedule:
       type: object
       properties:
@@ -106,25 +125,6 @@ components:
             - 45HC
             - 20RF
             - 40RF
-    ScheduleList:
-      type: object
-      properties:
-        total:
-          type: integer
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schedule'
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
