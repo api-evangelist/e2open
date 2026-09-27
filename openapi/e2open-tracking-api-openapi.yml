@@ -70,42 +70,14 @@ paths:
                     items:
                       $ref: '#/components/schemas/ContainerTracking'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
-    ContainerTracking:
-      type: object
-      properties:
-        containerNumber:
-          type: string
-        containerType:
-          type: string
-        status:
-          type: string
-          enum:
-          - EMPTY
-          - GATE_IN
-          - LOADED
-          - DEPARTED
-          - IN_TRANSIT
-          - ARRIVED
-          - GATE_OUT
-          - RETURNED
-        currentLocation:
-          $ref: '#/components/schemas/Location'
-        vessel:
-          $ref: '#/components/schemas/Vessel'
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
     TrackingEvent:
       type: object
       properties:
@@ -134,16 +106,6 @@ components:
           $ref: '#/components/schemas/Vessel'
         voyage:
           type: string
-    Location:
-      type: object
-      properties:
-        portCode:
-          type: string
-          description: UN/LOCODE
-        portName:
-          type: string
-        country:
-          type: string
     Vessel:
       type: object
       properties:
@@ -154,13 +116,51 @@ components:
           pattern: ^[0-9]{7}$
         callSign:
           type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+    Location:
+      type: object
+      properties:
+        portCode:
+          type: string
+          description: UN/LOCODE
+        portName:
+          type: string
+        country:
+          type: string
+    ContainerTracking:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+        status:
+          type: string
+          enum:
+          - EMPTY
+          - GATE_IN
+          - LOADED
+          - DEPARTED
+          - IN_TRANSIT
+          - ARRIVED
+          - GATE_OUT
+          - RETURNED
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
   securitySchemes:
     bearerAuth:
       type: http

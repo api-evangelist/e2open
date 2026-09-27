@@ -175,7 +175,56 @@ paths:
         '200':
           description: Booking cancelled
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ContainerRequest:
+      type: object
+      required:
+      - containerType
+      - quantity
+      properties:
+        containerType:
+          type: string
+          enum:
+          - 20GP
+          - 40GP
+          - 40HC
+          - 45HC
+          - 20RF
+          - 40RF
+        quantity:
+          type: integer
+          minimum: 1
+        weightKg:
+          type: number
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
     BookingSummary:
       type: object
       properties:
@@ -207,137 +256,6 @@ components:
           type: string
           format: date
           description: Estimated time of arrival
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
-    Container:
-      type: object
-      properties:
-        containerNumber:
-          type: string
-        containerType:
-          type: string
-          enum:
-          - 20GP
-          - 40GP
-          - 40HC
-          - 45HC
-          - 20RF
-          - 40RF
-          - 20OT
-          - 40OT
-        sealNumber:
-          type: string
-        weightKg:
-          type: number
-    BookingAmendment:
-      type: object
-      properties:
-        containers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerRequest'
-        etd:
-          type: string
-          format: date
-        reason:
-          type: string
-    BookingList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        bookings:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookingSummary'
-    TradeParty:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-          pattern: ^[A-Z]{2}$
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-    ContainerRequest:
-      type: object
-      required:
-      - containerType
-      - quantity
-      properties:
-        containerType:
-          type: string
-          enum:
-          - 20GP
-          - 40GP
-          - 40HC
-          - 45HC
-          - 20RF
-          - 40RF
-        quantity:
-          type: integer
-          minimum: 1
-        weightKg:
-          type: number
-    Booking:
-      allOf:
-      - $ref: '#/components/schemas/BookingSummary'
-      - type: object
-        properties:
-          booker:
-            type: object
-            properties:
-              name:
-                type: string
-              email:
-                type: string
-          shipper:
-            $ref: '#/components/schemas/TradeParty'
-          consignee:
-            $ref: '#/components/schemas/TradeParty'
-          containers:
-            type: array
-            items:
-              $ref: '#/components/schemas/Container'
-          commodity:
-            type: string
-          vessel:
-            $ref: '#/components/schemas/Vessel'
-          voyage:
-            type: string
-          submittedAt:
-            type: string
-            format: date-time
-          confirmedAt:
-            type: string
-            format: date-time
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
     BookingRequest:
       type: object
       required:
@@ -372,25 +290,107 @@ components:
           type: string
         specialInstructions:
           type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid bearer token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: ^[A-Z]{2}$
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+    Container:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+          enum:
+          - 20GP
+          - 40GP
+          - 40HC
+          - 45HC
+          - 20RF
+          - 40RF
+          - 20OT
+          - 40OT
+        sealNumber:
+          type: string
+        weightKg:
+          type: number
+    Booking:
+      allOf:
+      - $ref: '#/components/schemas/BookingSummary'
+      - type: object
+        properties:
+          booker:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+          shipper:
+            $ref: '#/components/schemas/TradeParty'
+          consignee:
+            $ref: '#/components/schemas/TradeParty'
+          containers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Container'
+          commodity:
+            type: string
+          vessel:
+            $ref: '#/components/schemas/Vessel'
+          voyage:
+            type: string
+          submittedAt:
+            type: string
+            format: date-time
+          confirmedAt:
+            type: string
+            format: date-time
+    BookingAmendment:
+      type: object
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerRequest'
+        etd:
+          type: string
+          format: date
+        reason:
+          type: string
+    BookingList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        bookings:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingSummary'
   securitySchemes:
     bearerAuth:
       type: http

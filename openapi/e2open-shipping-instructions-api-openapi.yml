@@ -40,6 +40,40 @@ paths:
                 $ref: '#/components/schemas/ShippingInstructions'
 components:
   schemas:
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: ^[A-Z]{2}$
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    ShippingInstructions:
+      allOf:
+      - $ref: '#/components/schemas/ShippingInstructionsRequest'
+      - type: object
+        properties:
+          siReference:
+            type: string
+          status:
+            type: string
+            enum:
+            - SUBMITTED
+            - ACCEPTED
+            - REJECTED
+            - PROCESSED
+          submittedAt:
+            type: string
+            format: date-time
     ShippingInstructionsRequest:
       type: object
       required:
@@ -70,40 +104,6 @@ components:
         marksAndNumbers:
           type: string
         specialInstructions:
-          type: string
-    ShippingInstructions:
-      allOf:
-      - $ref: '#/components/schemas/ShippingInstructionsRequest'
-      - type: object
-        properties:
-          siReference:
-            type: string
-          status:
-            type: string
-            enum:
-            - SUBMITTED
-            - ACCEPTED
-            - REJECTED
-            - PROCESSED
-          submittedAt:
-            type: string
-            format: date-time
-    TradeParty:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-          pattern: ^[A-Z]{2}$
-        email:
-          type: string
-          format: email
-        phone:
           type: string
   securitySchemes:
     bearerAuth:

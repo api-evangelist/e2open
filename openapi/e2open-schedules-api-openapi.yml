@@ -68,6 +68,15 @@ paths:
                 $ref: '#/components/schemas/ScheduleList'
 components:
   schemas:
+    ScheduleList:
+      type: object
+      properties:
+        total:
+          type: integer
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
     Vessel:
       type: object
       properties:
@@ -78,15 +87,6 @@ components:
           pattern: ^[0-9]{7}$
         callSign:
           type: string
-    ScheduleList:
-      type: object
-      properties:
-        total:
-          type: integer
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schedule'
     Schedule:
       type: object
       properties:
