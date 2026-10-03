@@ -68,25 +68,6 @@ paths:
                 $ref: '#/components/schemas/ScheduleList'
 components:
   schemas:
-    ScheduleList:
-      type: object
-      properties:
-        total:
-          type: integer
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schedule'
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
     Schedule:
       type: object
       properties:
@@ -125,6 +106,25 @@ components:
             - 45HC
             - 20RF
             - 40RF
+    ScheduleList:
+      type: object
+      properties:
+        total:
+          type: integer
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

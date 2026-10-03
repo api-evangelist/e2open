@@ -195,36 +195,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    ContainerRequest:
-      type: object
-      required:
-      - containerType
-      - quantity
-      properties:
-        containerType:
-          type: string
-          enum:
-          - 20GP
-          - 40GP
-          - 40HC
-          - 45HC
-          - 20RF
-          - 40RF
-        quantity:
-          type: integer
-          minimum: 1
-        weightKg:
-          type: number
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
     BookingSummary:
       type: object
       properties:
@@ -290,52 +260,18 @@ components:
           type: string
         specialInstructions:
           type: string
-    TradeParty:
+    BookingAmendment:
       type: object
       properties:
-        name:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerRequest'
+        etd:
           type: string
-        address:
+          format: date
+        reason:
           type: string
-        city:
-          type: string
-        country:
-          type: string
-          pattern: ^[A-Z]{2}$
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
-    Container:
-      type: object
-      properties:
-        containerNumber:
-          type: string
-        containerType:
-          type: string
-          enum:
-          - 20GP
-          - 40GP
-          - 40HC
-          - 45HC
-          - 20RF
-          - 40RF
-          - 20OT
-          - 40OT
-        sealNumber:
-          type: string
-        weightKg:
-          type: number
     Booking:
       allOf:
       - $ref: '#/components/schemas/BookingSummary'
@@ -368,17 +304,81 @@ components:
           confirmedAt:
             type: string
             format: date-time
-    BookingAmendment:
+    ContainerRequest:
+      type: object
+      required:
+      - containerType
+      - quantity
+      properties:
+        containerType:
+          type: string
+          enum:
+          - 20GP
+          - 40GP
+          - 40HC
+          - 45HC
+          - 20RF
+          - 40RF
+        quantity:
+          type: integer
+          minimum: 1
+        weightKg:
+          type: number
+    Container:
       type: object
       properties:
-        containers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerRequest'
-        etd:
+        containerNumber:
           type: string
-          format: date
-        reason:
+        containerType:
+          type: string
+          enum:
+          - 20GP
+          - 40GP
+          - 40HC
+          - 45HC
+          - 20RF
+          - 40RF
+          - 20OT
+          - 40OT
+        sealNumber:
+          type: string
+        weightKg:
+          type: number
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
+          type: string
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: ^[A-Z]{2}$
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
           type: string
     BookingList:
       type: object
