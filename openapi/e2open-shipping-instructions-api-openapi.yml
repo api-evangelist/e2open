@@ -40,6 +40,23 @@ paths:
                 $ref: '#/components/schemas/ShippingInstructions'
 components:
   schemas:
+    TradeParty:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+          pattern: ^[A-Z]{2}$
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
     ShippingInstructionsRequest:
       type: object
       required:
@@ -88,23 +105,6 @@ components:
           submittedAt:
             type: string
             format: date-time
-    TradeParty:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-          pattern: ^[A-Z]{2}$
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

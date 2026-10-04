@@ -70,14 +70,17 @@ paths:
                     items:
                       $ref: '#/components/schemas/ContainerTracking'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Location:
+      type: object
+      properties:
+        portCode:
+          type: string
+          description: UN/LOCODE
+        portName:
+          type: string
+        country:
+          type: string
     ContainerTracking:
       type: object
       properties:
@@ -104,16 +107,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrackingEvent'
-    Location:
-      type: object
-      properties:
-        portCode:
-          type: string
-          description: UN/LOCODE
-        portName:
-          type: string
-        country:
-          type: string
     Vessel:
       type: object
       properties:
@@ -161,6 +154,13 @@ components:
           $ref: '#/components/schemas/Vessel'
         voyage:
           type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
