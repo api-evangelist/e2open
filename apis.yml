@@ -135,6 +135,8 @@ apis:
   - type: GettingStarted
     url: https://www.inttra.com/services/integration/
 common:
+- url: https://www.e2open.com/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/e2open-capability-edges.yml
   name: e2open Business Capability Map
@@ -173,7 +175,7 @@ common:
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com
-modified: '2026-09-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 description: Supply chain software with a connected network and SaaS platform help you seize opportunities,
   predict disruptions, and drive efficiency and sustainability.
