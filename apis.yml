@@ -135,6 +135,12 @@ apis:
   - type: GettingStarted
     url: https://www.inttra.com/services/integration/
 common:
+- type: Plans
+  url: plans/e2open-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/e2open-rate-limits.yml
+- type: FinOps
+  url: finops/e2open-finops.yml
 - url: https://www.e2open.com/blog/
   type: Blog
 - type: CapabilityMap
