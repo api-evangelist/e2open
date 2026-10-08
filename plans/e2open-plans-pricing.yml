@@ -86,3 +86,37 @@ plans:
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - period
+  - transaction
+  plans:
+  - name: e2open Connected Network Subscription
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: INTTRA Ocean Execution
+    access: enterprise
+    model: metered
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - per-use
+  - name: Transportation Management
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
