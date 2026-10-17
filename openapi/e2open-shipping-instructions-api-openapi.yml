@@ -57,6 +57,23 @@ components:
           format: email
         phone:
           type: string
+    ShippingInstructions:
+      allOf:
+      - $ref: '#/components/schemas/ShippingInstructionsRequest'
+      - type: object
+        properties:
+          siReference:
+            type: string
+          status:
+            type: string
+            enum:
+            - SUBMITTED
+            - ACCEPTED
+            - REJECTED
+            - PROCESSED
+          submittedAt:
+            type: string
+            format: date-time
     ShippingInstructionsRequest:
       type: object
       required:
@@ -88,23 +105,6 @@ components:
           type: string
         specialInstructions:
           type: string
-    ShippingInstructions:
-      allOf:
-      - $ref: '#/components/schemas/ShippingInstructionsRequest'
-      - type: object
-        properties:
-          siReference:
-            type: string
-          status:
-            type: string
-            enum:
-            - SUBMITTED
-            - ACCEPTED
-            - REJECTED
-            - PROCESSED
-          submittedAt:
-            type: string
-            format: date-time
   securitySchemes:
     bearerAuth:
       type: http

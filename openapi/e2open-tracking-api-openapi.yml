@@ -71,61 +71,6 @@ paths:
                       $ref: '#/components/schemas/ContainerTracking'
 components:
   schemas:
-    Location:
-      type: object
-      properties:
-        portCode:
-          type: string
-          description: UN/LOCODE
-        portName:
-          type: string
-        country:
-          type: string
-    ContainerTracking:
-      type: object
-      properties:
-        containerNumber:
-          type: string
-        containerType:
-          type: string
-        status:
-          type: string
-          enum:
-          - EMPTY
-          - GATE_IN
-          - LOADED
-          - DEPARTED
-          - IN_TRANSIT
-          - ARRIVED
-          - GATE_OUT
-          - RETURNED
-        currentLocation:
-          $ref: '#/components/schemas/Location'
-        vessel:
-          $ref: '#/components/schemas/Vessel'
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
     TrackingEvent:
       type: object
       properties:
@@ -153,6 +98,61 @@ components:
         vessel:
           $ref: '#/components/schemas/Vessel'
         voyage:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+    ContainerTracking:
+      type: object
+      properties:
+        containerNumber:
+          type: string
+        containerType:
+          type: string
+        status:
+          type: string
+          enum:
+          - EMPTY
+          - GATE_IN
+          - LOADED
+          - DEPARTED
+          - IN_TRANSIT
+          - ARRIVED
+          - GATE_OUT
+          - RETURNED
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+    Location:
+      type: object
+      properties:
+        portCode:
+          type: string
+          description: UN/LOCODE
+        portName:
+          type: string
+        country:
+          type: string
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
           type: string
   responses:
     NotFound:

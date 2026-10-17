@@ -176,87 +176,6 @@ paths:
           description: Booking cancelled
 components:
   schemas:
-    Vessel:
-      type: object
-      properties:
-        vesselName:
-          type: string
-        imoNumber:
-          type: string
-          pattern: ^[0-9]{7}$
-        callSign:
-          type: string
-    BookingList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        bookings:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookingSummary'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
-    BookingSummary:
-      type: object
-      properties:
-        bookingId:
-          type: string
-          description: INTTRA booking reference
-        carrierBookingReference:
-          type: string
-          description: Carrier-assigned booking reference
-        carrier:
-          type: string
-          description: Carrier SCAC code
-        status:
-          type: string
-          enum:
-          - PENDING
-          - CONFIRMED
-          - CANCELLED
-          - AMENDED
-        originPort:
-          type: string
-        destinationPort:
-          type: string
-        etd:
-          type: string
-          format: date
-          description: Estimated time of departure
-        eta:
-          type: string
-          format: date
-          description: Estimated time of arrival
-    ContainerRequest:
-      type: object
-      required:
-      - containerType
-      - quantity
-      properties:
-        containerType:
-          type: string
-          enum:
-          - 20GP
-          - 40GP
-          - 40HC
-          - 45HC
-          - 20RF
-          - 40RF
-        quantity:
-          type: integer
-          minimum: 1
-        weightKg:
-          type: number
     BookingRequest:
       type: object
       required:
@@ -291,6 +210,48 @@ components:
           type: string
         specialInstructions:
           type: string
+    BookingList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        bookings:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingSummary'
+    BookingSummary:
+      type: object
+      properties:
+        bookingId:
+          type: string
+          description: INTTRA booking reference
+        carrierBookingReference:
+          type: string
+          description: Carrier-assigned booking reference
+        carrier:
+          type: string
+          description: Carrier SCAC code
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+          - CANCELLED
+          - AMENDED
+        originPort:
+          type: string
+        destinationPort:
+          type: string
+        etd:
+          type: string
+          format: date
+          description: Estimated time of departure
+        eta:
+          type: string
+          format: date
+          description: Estimated time of arrival
     Booking:
       allOf:
       - $ref: '#/components/schemas/BookingSummary'
@@ -323,6 +284,15 @@ components:
           confirmedAt:
             type: string
             format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
     TradeParty:
       type: object
       properties:
@@ -339,6 +309,28 @@ components:
           type: string
           format: email
         phone:
+          type: string
+    BookingAmendment:
+      type: object
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerRequest'
+        etd:
+          type: string
+          format: date
+        reason:
+          type: string
+    Vessel:
+      type: object
+      properties:
+        vesselName:
+          type: string
+        imoNumber:
+          type: string
+          pattern: ^[0-9]{7}$
+        callSign:
           type: string
     Container:
       type: object
@@ -360,27 +352,35 @@ components:
           type: string
         weightKg:
           type: number
-    BookingAmendment:
+    ContainerRequest:
       type: object
+      required:
+      - containerType
+      - quantity
       properties:
-        containers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerRequest'
-        etd:
+        containerType:
           type: string
-          format: date
-        reason:
-          type: string
+          enum:
+          - 20GP
+          - 40GP
+          - 40HC
+          - 45HC
+          - 20RF
+          - 40RF
+        quantity:
+          type: integer
+          minimum: 1
+        weightKg:
+          type: number
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Missing or invalid bearer token
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid bearer token
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
