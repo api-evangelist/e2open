@@ -1,8 +1,9 @@
 slug: e2open
-provider: e2open
+provider: E2open
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
+- Defense & Aerospace
 - Transportation & Logistics
 min_confidence: 0.7
 capability_model:
@@ -11,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 4
 edges:
 - tag: Tracking
   spec_file: e2open-tracking-api-openapi.yml
@@ -34,14 +35,23 @@ edges:
   reason: Acceptance, amendment and cancellation of ocean carrier bookings against vessel capacity is
     squarely Booking and Reservation Management within Freight Capacity Management; schemas Vessel, ContainerRequest,
     TradeParty confirm ocean freight booking.
+- tag: Schedules
+  spec_file: e2open-schedules-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.8
+  evidence: GET /schedules searchSchedules Search ocean vessel schedules
+  reason: Ocean vessel schedule search supports transport planning and booking — logistics operations
+    management.
 - tag: Shipping Instructions
   spec_file: e2open-shipping-instructions-api-openapi.yml
-  capability_id: BC-2500
-  capability_id_l1: BC-2500
-  capability_name: Cargo Documentation Management
-  confidence: 0.75
-  evidence: POST /shipping-instructions submitShippingInstructions 'Submit shipping instructions (SI)';
-    schemas ShippingInstructions, TradeParty
-  reason: Submission of ocean shipping instructions is the document-lifecycle step that drives bill-of-lading
-    issuance, so Cargo Documentation Management is the right L1; the evidence does not clearly name the
-    B/L sub-capability, so no L2.
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.78
+  evidence: POST /shipping-instructions — "Submit shipping instructions (SI)"; schemas ShippingInstructionsRequest,
+    TradeParty; "ocean execution APIs ... for global shipping"
+  reason: Submission of ocean shipping instructions is freight documentation within transport/logistics
+    execution, so it realises Logistics Operations Management under Supply Chain Management. Slight ambiguity
+    versus order fulfilment, hence 0.78.
