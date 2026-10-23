@@ -135,6 +135,8 @@ apis:
   - type: GettingStarted
     url: https://www.inttra.com/services/integration/
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/e2open/overview
 - type: Plans
   url: plans/e2open-plans-pricing.yml
 - type: RateLimits
