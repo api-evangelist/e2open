@@ -1,32 +1,26 @@
 {
+  "info": {
+    "_postman_id": "1cf49509-e38c-4576-b115-3f15609be812",
+    "name": "INTTRA Ocean Execution API (e2open) Shipping Instructions\u2026",
+    "description": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:20:37.000Z",
+    "updatedAt": "2026-10-21T21:20:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1cf49509-e38c-4576-b115-3f15609be812"
+  },
   "item": [
     {
-      "id": "a3d0a6ba-65bd-43c9-96da-1165984c93c2",
-      "name": "Shipping Instructions",
-      "description": {
-        "content": "Bill of lading shipping instructions",
-        "type": "text/plain"
-      },
+      "name": "shipping-instructions",
       "item": [
         {
-          "id": "6f204597-e4da-4c71-82dd-c72ecf7bf473",
           "name": "Submit shipping instructions (SI)",
+          "id": "d3bfca2f-795c-4040-aa74-27b2385c7f68",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Submit shipping instructions (SI)",
-            "description": {
-              "content": "Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed booking. Includes cargo description, consignee, notify parties, and special instructions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "shipping-instructions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -37,86 +31,94 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+              "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"CJ\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"VQ\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"EH\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/shipping-instructions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shipping-instructions"
+              ]
+            },
+            "description": "Submits shipping instructions (bill of lading instructions) to the carrier for a confirmed booking. Includes cargo description, consignee, notify parties, and special instructions."
           },
           "response": [
             {
-              "id": "d38d1115-4d94-4580-a5ee-23620d538c4c",
+              "id": "e3c963e6-0218-4fc8-9a5a-1710c628687d",
               "name": "Shipping instructions submitted",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "shipping-instructions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"HI\",\n    \"email\": \"KCaAiO@vru.gz\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"EA\",\n    \"email\": \"7DobS81Zz-xsVss@eJVjyIseGnyOOFrdBiIyY.aacj\",\n    \"phone\": \"string\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"JQ\",\n    \"email\": \"pHpYopoGV28@PAXPTrWRgoImzPPQIzM.vw\",\n    \"phone\": \"string\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
+                  "raw": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"CJ\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"VQ\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"EH\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shipping-instructions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shipping-instructions"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"bookingId\": \"string\",\n  \"shipper\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"NZ\",\n    \"email\": \"vME9aI0@TdftRO.gf\",\n    \"phone\": \"string\"\n  },\n  \"consignee\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"GV\",\n    \"email\": \"mAysp5@UrttjwRAGuJRvjCEKFW.fs\",\n    \"phone\": \"string\"\n  },\n  \"cargoDescription\": \"string\",\n  \"notifyParty\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"HZ\",\n    \"email\": \"RAG4Qkp@SHLOZ.dgvm\",\n    \"phone\": \"string\"\n  },\n  \"hsCode\": \"string\",\n  \"grossWeightKg\": 7740.681979834822,\n  \"numberOfPackages\": 7713,\n  \"packageType\": \"string\",\n  \"marksAndNumbers\": \"string\",\n  \"specialInstructions\": \"string\",\n  \"siReference\": \"string\",\n  \"status\": \"SUBMITTED\",\n  \"submittedAt\": \"2012-02-19T12:17:37.081Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"bookingId\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"KJ\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"EM\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"cargoDescription\": \"<string>\",\n  \"notifyParty\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"HL\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"hsCode\": \"<string>\",\n  \"grossWeightKg\": \"<number>\",\n  \"numberOfPackages\": \"<integer>\",\n  \"packageType\": \"<string>\",\n  \"marksAndNumbers\": \"<string>\",\n  \"specialInstructions\": \"<string>\",\n  \"siReference\": \"<string>\",\n  \"status\": \"ACCEPTED\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-21T21:20:38.000Z",
+              "updatedAt": "2026-10-21T21:20:38.000Z",
+              "uid": "35240-e3c963e6-0218-4fc8-9a5a-1710c628687d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:20:38.000Z",
+          "updatedAt": "2026-10-21T21:20:38.000Z",
+          "uid": "35240-d3bfca2f-795c-4040-aa74-27b2385c7f68"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.inttra.com/v1",
-      "key": "baseUrl"
+      "id": "d7ef095b-f800-4f67-b34c-289e85da1955",
+      "createdAt": "2026-10-21T21:20:38.000Z",
+      "updatedAt": "2026-10-21T21:20:38.000Z",
+      "uid": "35240-d7ef095b-f800-4f67-b34c-289e85da1955"
     }
   ],
   "auth": {
@@ -124,17 +126,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "a2425ad9-0c1a-4373-bc73-36a4e3e9482c",
-    "name": "INTTRA Ocean Execution API (e2open) Bookings Shipping Instructions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.inttra.com/v1"
     }
-  }
+  ]
 }

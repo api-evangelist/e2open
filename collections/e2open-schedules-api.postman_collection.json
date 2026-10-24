@@ -1,98 +1,111 @@
 {
+  "info": {
+    "_postman_id": "55d0c844-361e-4cee-83a7-10048d639928",
+    "name": "INTTRA Ocean Execution API (e2open) Schedules API",
+    "description": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:20:31.000Z",
+    "updatedAt": "2026-10-21T21:20:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55d0c844-361e-4cee-83a7-10048d639928"
+  },
   "item": [
     {
-      "id": "fd839654-f02d-48e1-8a25-ee5eeb02dcbf",
-      "name": "Schedules",
-      "description": {
-        "content": "Ocean carrier schedule lookup",
-        "type": "text/plain"
-      },
+      "name": "schedules",
       "item": [
         {
-          "id": "adf05029-270b-4e83-acaa-df8c0b98f294",
           "name": "Search ocean vessel schedules",
+          "id": "d7035e62-d95f-49b9-a65c-3f92929e1234",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Search ocean vessel schedules",
-            "description": {
-              "content": "Returns vessel sailing schedules from origin to destination port. Supports filtering by carrier, vessel, and date range.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "schedules"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "originPort",
-                  "value": "<string>",
-                  "description": "(Required) UN/LOCODE origin port"
-                },
-                {
-                  "disabled": false,
-                  "key": "destinationPort",
-                  "value": "<string>",
-                  "description": "(Required) UN/LOCODE destination port"
-                },
-                {
-                  "disabled": false,
-                  "key": "departureAfter",
-                  "value": "<date>",
-                  "description": "Search from this departure date (ISO 8601)"
-                },
-                {
-                  "disabled": false,
-                  "key": "departureBefore",
-                  "value": "<date>"
-                },
-                {
-                  "disabled": false,
-                  "key": "carrier",
-                  "value": "<string>",
-                  "description": "Filter by carrier SCAC code"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20"
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/schedules?originPort=<string>&destinationPort=<string>&departureAfter=<date>&departureBefore=<date>&carrier=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "schedules"
+              ],
+              "query": [
+                {
+                  "description": "(Required) UN/LOCODE origin port",
+                  "key": "originPort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) UN/LOCODE destination port",
+                  "key": "destinationPort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Search from this departure date (ISO 8601)",
+                  "key": "departureAfter",
+                  "value": "<date>"
+                },
+                {
+                  "key": "departureBefore",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Filter by carrier SCAC code",
+                  "key": "carrier",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns vessel sailing schedules from origin to destination port. Supports filtering by carrier, vessel, and date range."
           },
           "response": [
             {
-              "id": "38b99ec5-4b4c-4bbd-afa3-e554855f5213",
+              "id": "abd103b7-9f84-44f3-beb9-e4b64b791a4f",
               "name": "Ocean schedules",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "schedules"
-                  ],
+                  "raw": "{{baseUrl}}/schedules?originPort=<string>&destinationPort=<string>&departureAfter=<date>&departureBefore=<date>&carrier=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "schedules"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) UN/LOCODE origin port",
                       "key": "originPort",
                       "value": "<string>"
                     },
                     {
+                      "description": "(Required) UN/LOCODE destination port",
                       "key": "destinationPort",
                       "value": "<string>"
                     },
                     {
+                      "description": "Search from this departure date (ISO 8601)",
                       "key": "departureAfter",
                       "value": "<date>"
                     },
@@ -101,6 +114,7 @@
                       "value": "<date>"
                     },
                     {
+                      "description": "Filter by carrier SCAC code",
                       "key": "carrier",
                       "value": "<string>"
                     },
@@ -108,54 +122,35 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"total\": 1347,\n  \"schedules\": [\n    {\n      \"carrier\": \"string\",\n      \"carrierName\": \"string\",\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"1665990\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"1963-10-12T16:50:18.452Z\",\n      \"eta\": \"1982-03-11T22:04:36.505Z\",\n      \"transitTimeDays\": 5904,\n      \"cutoffDateTime\": \"1946-10-17T15:55:40.031Z\",\n      \"availableEquipment\": [\n        \"40RF\",\n        \"40RF\"\n      ]\n    },\n    {\n      \"carrier\": \"string\",\n      \"carrierName\": \"string\",\n      \"vessel\": {\n        \"vesselName\": \"string\",\n        \"imoNumber\": \"0739929\",\n        \"callSign\": \"string\"\n      },\n      \"voyage\": \"string\",\n      \"originPort\": \"string\",\n      \"destinationPort\": \"string\",\n      \"etd\": \"2019-01-31T10:50:21.457Z\",\n      \"eta\": \"1953-09-13T17:43:41.102Z\",\n      \"transitTimeDays\": 5814,\n      \"cutoffDateTime\": \"2011-02-11T04:59:00.008Z\",\n      \"availableEquipment\": [\n        \"20RF\",\n        \"40GP\"\n      ]\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"schedules\": [\n    {\n      \"carrier\": \"<string>\",\n      \"carrierName\": \"<string>\",\n      \"vessel\": {\n        \"vesselName\": \"<string>\",\n        \"imoNumber\": \"8386143\",\n        \"callSign\": \"<string>\"\n      },\n      \"voyage\": \"<string>\",\n      \"originPort\": \"<string>\",\n      \"destinationPort\": \"<string>\",\n      \"etd\": \"<dateTime>\",\n      \"eta\": \"<dateTime>\",\n      \"transitTimeDays\": \"<integer>\",\n      \"cutoffDateTime\": \"<dateTime>\",\n      \"availableEquipment\": [\n        \"40GP\",\n        \"20GP\"\n      ]\n    },\n    {\n      \"carrier\": \"<string>\",\n      \"carrierName\": \"<string>\",\n      \"vessel\": {\n        \"vesselName\": \"<string>\",\n        \"imoNumber\": \"7367189\",\n        \"callSign\": \"<string>\"\n      },\n      \"voyage\": \"<string>\",\n      \"originPort\": \"<string>\",\n      \"destinationPort\": \"<string>\",\n      \"etd\": \"<dateTime>\",\n      \"eta\": \"<dateTime>\",\n      \"transitTimeDays\": \"<integer>\",\n      \"cutoffDateTime\": \"<dateTime>\",\n      \"availableEquipment\": [\n        \"40HC\",\n        \"20RF\"\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:20:32.000Z",
+              "updatedAt": "2026-10-21T21:20:32.000Z",
+              "uid": "35240-abd103b7-9f84-44f3-beb9-e4b64b791a4f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:20:32.000Z",
+          "updatedAt": "2026-10-21T21:20:32.000Z",
+          "uid": "35240-d7035e62-d95f-49b9-a65c-3f92929e1234"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.inttra.com/v1",
-      "key": "baseUrl"
+      "id": "2e258a0b-c7aa-4864-9e77-5ff9c8f82508",
+      "createdAt": "2026-10-21T21:20:32.000Z",
+      "updatedAt": "2026-10-21T21:20:32.000Z",
+      "uid": "35240-2e258a0b-c7aa-4864-9e77-5ff9c8f82508"
     }
   ],
   "auth": {
@@ -163,17 +158,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "18199219-6c6d-4551-b87a-5c195991a46f",
-    "name": "INTTRA Ocean Execution API (e2open) Bookings Schedules API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a bearer token obtained from the identity service before making API requests.\n\nContact Support:\n Name: INTTRA / e2open Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.inttra.com/v1"
     }
-  }
+  ]
 }
