@@ -1,4 +1,4 @@
-# e2open (e2open)
+# E2open
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,98 +66,149 @@
 
 Supply chain software with a connected network and SaaS platform help you seize opportunities, predict disruptions, and drive efficiency and sustainability.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/apis.yml)
+**Areas:** Logistics · Supply Chain · Transportation · Booking
 
-## Timestamps
+## E2open on APIs.io
 
-- **Modified:** 2026-05-19
+Everything profiled for E2open is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/e2open/](https://apis.io/providers/e2open/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (6)
 
-### E2open Supply Chain Platform API
+- [E2open Supply Chain Platform API](https://apis.io/apis/e2open/e2open-supply-chain-api/) — E2open supply chain platform APIs enable supply chain event management, transportation management, customs compliance, and end-to-end shipment visibility.…
+- [E2open Transportation Management API](https://apis.io/apis/e2open/e2open-transportation-management-api/) — E2open Transportation Management API provides appointment scheduling, carrier integration, and real-time rating capabilities. REST endpoints allow carriers…
+- [e2open Bookings API](https://apis.io/apis/e2open/e2open-bookings-api/) — Ocean shipping booking management
+- [e2open Schedules API](https://apis.io/apis/e2open/e2open-schedules-api/) — Ocean carrier schedule lookup
+- [e2open Shipping Instructions API](https://apis.io/apis/e2open/e2open-shipping-instructions-api/) — Bill of lading shipping instructions
+- [e2open Tracking API](https://apis.io/apis/e2open/e2open-tracking-api/) — Container and shipment tracking
 
-E2open supply chain platform APIs enable supply chain event management, transportation management, customs compliance, and end-to-end shipment visibility. The platform supports REST/JSON, XML, and EDI protocols connecting over 400,000 manufacturing, logistics, channel, and distribution partners, tracking over 12 billion transactions annually.
+### Published properties
 
-- **Human URL:** [https://www.e2open.com/](https://www.e2open.com/)
-- **Base URL:** `https://api.e2open.com`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-#### Tags
+#### Agentic access (1)
 
-- JSON
-- Logistics
-- REST
-- Supply Chain
-- Trade Management
-- Visibility
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [E2Open Agentic Access](https://apis.io/agentic-access/e2open/e2open-agentic-access/)
 
-- [Documentation](https://www.e2open.com/)
-- [Postman Collection](collections/inttra-ocean-execution.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/inttra-ocean-execution.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Schema (1)
 
-### INTTRA Ocean Execution API
+The data models the API reads and writes.
 
-INTTRA (now part of e2open) provides ocean execution APIs for the world's largest multi-carrier e-commerce platform for global shipping. The RESTful API uses HTTPS with JSON for booking, ocean schedules, rates, and visibility/track and trace products. Authentication requires a token obtained from the identity service before making API requests.
+- [e2open / INTTRA Ocean Shipment](https://apis.io/schemas/e2open/e2open-shipment/)
 
-- **Human URL:** [https://apidocs.inttra.com/](https://apidocs.inttra.com/)
-- **Base URL:** `https://api.inttra.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- Booking
-- JSON
-- Logistics
-- Ocean Shipping
-- REST
-- Supply Chain
-- Track and Trace
+- [E2Open Context](https://apis.io/jsonld/e2open/e2open-context/)
 
-#### Properties
+#### Collections (5)
 
-- [Documentation](https://apidocs.inttra.com/)
-- [Reference](https://apidocs.inttra.com/)
-- [Getting Started](https://www.inttra.com/services/integration/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/openapi/inttra-ocean-execution-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/inttra-ocean-execution.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/inttra-ocean-execution.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-### E2open Transportation Management API
+- [INTTRA Ocean Execution API (e2open) Bookings API](https://apis.io/collections/e2open/open-e2open-bookings-api/)
+- [INTTRA Ocean Execution API (e2open) Bookings Schedules API](https://apis.io/collections/e2open/open-e2open-schedules-api/)
+- [INTTRA Ocean Execution API (e2open) Bookings Shipping Instructions API](https://apis.io/collections/e2open/open-e2open-shipping-instructions-api/)
+- [INTTRA Ocean Execution API (e2open) Bookings Tracking API](https://apis.io/collections/e2open/open-e2open-tracking-api/)
+- [INTTRA Ocean Execution API (e2open)](https://apis.io/collections/e2open/open-inttra-ocean-execution/)
 
-E2open Transportation Management API provides appointment scheduling, carrier integration, and real-time rating capabilities. REST endpoints allow carriers to POST documents, retrieve current rates, manage load stop details, and communicate appointment status updates with supply chain stakeholders.
+#### Governance rules (1)
 
-- **Human URL:** [https://marketplace.e2open.com/](https://marketplace.e2open.com/)
-- **Base URL:** `https://api.e2open.com`
+Spectral rulesets for the provider's contracts.
 
-#### Tags
+- [E2open — jsonschema rules](https://apis.io/rules/e2open/e2open-jsonschema-spectral-rules/)
 
-- Appointment Scheduling
-- Carrier Integration
-- Logistics
-- Supply Chain
-- Transportation
+#### Security (3)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://marketplace.e2open.com/product/api-implementation/)
-- [Postman Collection](collections/inttra-ocean-execution.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/inttra-ocean-execution.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [E2Open Authentication](https://apis.io/security/e2open/e2open-authentication/)
+- [E2Open Domain Security](https://apis.io/security/e2open/e2open-domain-security/)
+- [E2Open Vulnerability Disclosure](https://apis.io/security/e2open/e2open-vulnerability-disclosure/)
 
-## Common Properties
+#### Plans and pricing (1)
 
-- [GitHub Organization](https://github.com/e2open)
-- [LinkedIn](https://www.linkedin.com/company/e2open)
+Published plans, tiers and prices.
+
+- [E2Open Plans Pricing](https://apis.io/plans/e2open/e2open-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [E2Open Rate Limits](https://apis.io/rate-limits/e2open/e2open-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [E2Open Finops](https://apis.io/finops/e2open/e2open-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.e2open.com/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/openapi/inttra-ocean-execution-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/json-schema/e2open-shipment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/e2open/refs/heads/main/json-ld/e2open-context.jsonld)
-- [Portal](https://apidocs.inttra.com/)
 - [Documentation](https://www.e2open.com/e2open-network-connectivity/)
-- [Privacy Policy](https://www.e2open.com/privacy-policy/)
-- [Terms of Service](https://www.inttra.com/legal/)
-- [Getting Started](https://marketplace.e2open.com/)
+- [Getting started](https://marketplace.e2open.com/)
 - [Support](https://knowledge.e2open.com/knowledgecenter/inttra-resources/)
+- [Blog](https://www.e2open.com/blog/)
+- [Terms of service](https://www.inttra.com/legal/)
+- [Privacy policy](https://www.e2open.com/privacy-policy/)
+- [GitHub](https://github.com/e2open)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** kin@apievangelist.com
+**Kin Score 41.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 56.6 |
+| Contract governance | 9.8 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 57.1 |
+| Access clarity | 28.9 |
+
+**Agent readiness 21.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/e2open/](https://apis.io/providers/e2open/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for E2open: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/e2open/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
